@@ -1,35 +1,34 @@
 package org.example.smarthealthcareappointmentsystem.model;
 
+import jakarta.persistence.*;
 import lombok.Builder;
-import org.springframework.data.annotation.Id;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-@Builder
-public class User {
+import java.time.LocalDate;
+
+@Entity
+@Table(name="users")
+public class User  {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name="name",length = 50,nullable = false,unique = false)
     private String name;
+    private String username;
     private String email;
     private String password;
+    private LocalDate birthday;
+    @ManyToOne
+    @JoinColumn(name="role_id")
+    private Role role;
+public User(){
 
-    public User(String id,String name,String email,String password){
-        this.id=id;
-        this.name=name;
-        this.email=email;
-        this.password=password;
-    }
-    public User(String name,String email,String password){
-        this.id=id;
-        this.name=name;
-        this.email=email;
-        this.password=password;
-    }
+}
 
-    public String getId() {
+
+
+    public Long getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -54,6 +53,22 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override
