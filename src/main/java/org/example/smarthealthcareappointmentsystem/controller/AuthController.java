@@ -23,7 +23,6 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginRequest loginRequest){
 
-
         return ResponseEntity.ok( this.authService.verify(loginRequest));
     }
 
