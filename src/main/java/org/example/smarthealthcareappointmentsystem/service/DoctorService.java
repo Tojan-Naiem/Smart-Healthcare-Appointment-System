@@ -9,6 +9,7 @@ import org.example.smarthealthcareappointmentsystem.model.Role;
 import org.example.smarthealthcareappointmentsystem.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class DoctorService {
 
     public void addDoctor(DoctorDTO registeredDoctor){
         boolean isExistByEmail=this.doctorRepository.existsByEmail(registeredDoctor.getEmail());
-        boolean isExistByUsername=this.doctorRepository.existsByUsername(registeredDoctor.getEmail());
+        boolean isExistByUsername=this.doctorRepository.existsByUsername(registeredDoctor.getUsername());
 
         if(isExistByEmail){
             throw new AlreadyExistsException("The email is already exists");
@@ -44,7 +45,7 @@ public class DoctorService {
     }
 
     public Page<DoctorDTO> getDoctors(Pageable pageable,String filterKey,String filterValue){
-        Page<Doctor> doctors;
+        Page<Doctor> doctors=null;
         if(filterKey!=null&&filterValue!=null&&!filterKey.isEmpty()&&!filterValue.isEmpty()){
             switch (filterKey){
                 case "specialty":

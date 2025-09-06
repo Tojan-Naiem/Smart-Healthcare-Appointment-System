@@ -13,7 +13,7 @@ public class RoleService {
     public Role addRole(RoleDTO roleDTO){
         Role role=new Role();
         role.setName(roleDTO.getRoleName());
-        System.out.println("IN@");
-        return this.roleRepository.save(role);
+        Role newRole=this.roleRepository.save(role);
+        return newRole;
     }
 }
