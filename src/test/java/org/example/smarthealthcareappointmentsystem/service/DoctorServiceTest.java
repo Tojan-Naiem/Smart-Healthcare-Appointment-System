@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,7 +25,7 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class DoctorServiceTest {
-    @InjectMocks
+    @Autowired
     private DoctorServiceImp doctorService;
     @Mock
     private DoctorRepository doctorRepository;
