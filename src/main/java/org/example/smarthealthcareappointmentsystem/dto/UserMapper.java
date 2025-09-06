@@ -1,5 +1,6 @@
 package org.example.smarthealthcareappointmentsystem.dto;
 
+import org.example.smarthealthcareappointmentsystem.model.Appointment;
 import org.example.smarthealthcareappointmentsystem.model.Doctor;
 import org.example.smarthealthcareappointmentsystem.model.Patient;
 import org.example.smarthealthcareappointmentsystem.model.User;
@@ -16,4 +17,7 @@ public interface UserMapper {
 
     @Mapping(target = "password", ignore = true)
     Patient toEntity(PatientDTO patientDTO);
+    AppointmentDTO toDTO(Appointment appointment);
+
+    Appointment toEntity(AppointmentDTO appointmentDTO);
 }

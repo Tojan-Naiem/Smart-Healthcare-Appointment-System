@@ -21,10 +21,10 @@ public class Appointment {
     @JoinColumn(name = "doctor_id", nullable = false)
     private Doctor doctor;
     @Column(nullable = false)
-    private LocalDateTime appointmentTime;
+    private LocalDateTime appointmentDateTime;
     private Status status=Status.SCHEDULED;
     private String notes;
-    private Integer duration;
+    private Integer duration; // minutes
 
 
     public Status getStatus() {
@@ -59,12 +59,12 @@ public class Appointment {
         this.id = id;
     }
 
-    public LocalDateTime getAppointmentTime() {
-        return appointmentTime;
+    public LocalDateTime getAppointmentDateTime() {
+        return appointmentDateTime;
     }
 
-    public void setAppointmentTime(LocalDateTime appointmentTime) {
-        this.appointmentTime = appointmentTime;
+    public void setAppointmentDateTime(LocalDateTime appointmentDateTime) {
+        this.appointmentDateTime = appointmentDateTime;
     }
 
     public Doctor getDoctor() {
