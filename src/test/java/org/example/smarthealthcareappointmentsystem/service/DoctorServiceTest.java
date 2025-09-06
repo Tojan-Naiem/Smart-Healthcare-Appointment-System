@@ -5,20 +5,18 @@ import org.example.smarthealthcareappointmentsystem.dto.UserMapper;
 import org.example.smarthealthcareappointmentsystem.exception.AlreadyExistsException;
 import org.example.smarthealthcareappointmentsystem.exception.ResourcesNotFound;
 import org.example.smarthealthcareappointmentsystem.model.Doctor;
-import org.example.smarthealthcareappointmentsystem.model.Role;
 import org.example.smarthealthcareappointmentsystem.repository.DoctorRepository;
+import org.example.smarthealthcareappointmentsystem.service.Imp.DoctorServiceImp;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.print.Doc;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,7 +25,7 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 class DoctorServiceTest {
     @InjectMocks
-    private DoctorService doctorService;
+    private DoctorServiceImp doctorService;
     @Mock
     private DoctorRepository doctorRepository;
     @Mock
@@ -221,7 +219,7 @@ class DoctorServiceTest {
         when(doctorRepository.save(any(Doctor.class))).thenReturn(updatedDoctor);
 
 
-        DoctorDTO returnedDoctorDTO=this.doctorService.updateDoctor(doctorDTO);
+        DoctorDTO returnedDoctorDTO=this.doctorService.updateDoctor(1L,doctorDTO);
 
         assertEquals(returnedDoctorDTO.getEmail(),doctorDTO.getEmail());
         assertEquals(returnedDoctorDTO.getUsername(),doctorDTO.getUsername());
@@ -236,6 +234,7 @@ class DoctorServiceTest {
         doctor.setEmail("t@gmail.com");
         doctor.setUsername("tt");
         doctor.setName("Sawsan");
+        doctor.setId(1L);
 
         //input doctor
 
@@ -248,7 +247,7 @@ class DoctorServiceTest {
         when(this.doctorRepository.findByEmail("tt@gmail.com")).thenReturn(Optional.empty());
         ResourcesNotFound resourcesNotFound=assertThrows(
                 ResourcesNotFound.class,()->{
-                    this.doctorService.updateDoctor(doctorDTO);
+                    this.doctorService.updateDoctor(1L,doctorDTO);
                 }
         );
         assertEquals(resourcesNotFound.getMessage(),"The doctor is not found");

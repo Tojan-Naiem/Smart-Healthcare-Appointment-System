@@ -1,4 +1,4 @@
-package org.example.smarthealthcareappointmentsystem.service;
+package org.example.smarthealthcareappointmentsystem.service.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

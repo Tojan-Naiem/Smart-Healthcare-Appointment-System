@@ -1,4 +1,4 @@
 package org.example.smarthealthcareappointmentsystem.service;
 
-public class RoleService {
+public class PatientService {
 }

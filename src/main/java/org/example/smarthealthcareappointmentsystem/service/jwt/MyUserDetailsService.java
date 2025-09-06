@@ -1,4 +1,4 @@
-package org.example.smarthealthcareappointmentsystem.service;
+package org.example.smarthealthcareappointmentsystem.service.jwt;
 
 import org.example.smarthealthcareappointmentsystem.model.User;
 import org.example.smarthealthcareappointmentsystem.model.UserPrincipal;

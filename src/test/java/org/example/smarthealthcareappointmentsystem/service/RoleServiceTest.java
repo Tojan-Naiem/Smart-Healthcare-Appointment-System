@@ -1,13 +1,12 @@
 package org.example.smarthealthcareappointmentsystem.service;
 
 import org.example.smarthealthcareappointmentsystem.dto.RoleDTO;
-import org.example.smarthealthcareappointmentsystem.model.Doctor;
 import org.example.smarthealthcareappointmentsystem.model.Role;
 import org.example.smarthealthcareappointmentsystem.repository.RoleRepository;
+import org.example.smarthealthcareappointmentsystem.service.Imp.RoleServiceImp;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,7 +19,7 @@ class RoleServiceTest {
     @Mock
     private RoleRepository roleRepository;
     @InjectMocks
-    private RoleService roleService;
+    private RoleServiceImp roleServiceImp;
 
     @Test
     public void addRole_returnCorrect(){
@@ -31,7 +30,7 @@ class RoleServiceTest {
         savedRole.setName(roleDTO.getRoleName());
         when(roleRepository.save(any(Role.class))).thenReturn(savedRole);
 
-        Role newRole=this.roleService.addRole(roleDTO);
+        Role newRole=this.roleServiceImp.addRole(roleDTO);
         assertEquals(newRole.getName(),savedRole.getName());
         verify(this.roleRepository).save(any(Role.class));
 

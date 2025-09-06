@@ -1,7 +1,7 @@
 package org.example.smarthealthcareappointmentsystem.controller;
 
 import org.example.smarthealthcareappointmentsystem.dto.DoctorDTO;
-import org.example.smarthealthcareappointmentsystem.service.DoctorService;
+import org.example.smarthealthcareappointmentsystem.service.Imp.DoctorServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -9,13 +9,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.Doc;
-
 @RestController
 @RequestMapping("/api/v1/doctor")
 public class DoctorController {
     @Autowired
-    private DoctorService doctorService;
+    private DoctorServiceImp doctorService;
 
     @GetMapping("/")
     public ResponseEntity getDoctors(
@@ -39,8 +37,8 @@ public class DoctorController {
          return ResponseEntity.ok("Successfully create the doctor!");
     }
     @PutMapping("/{id}")
-    public ResponseEntity updateDoctor(@RequestBody DoctorDTO doctorDTO){
-        return ResponseEntity.ok(this.doctorService.updateDoctor(doctorDTO));
+    public ResponseEntity updateDoctor(@PathVariable Long id,@RequestBody DoctorDTO doctorDTO){
+        return ResponseEntity.ok(this.doctorService.updateDoctor(id,doctorDTO));
     }
     @DeleteMapping("/{id}")
     public ResponseEntity deleteDoctor(@PathVariable Long id){

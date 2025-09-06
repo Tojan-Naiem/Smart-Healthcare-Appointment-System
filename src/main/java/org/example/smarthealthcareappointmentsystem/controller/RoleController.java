@@ -1,7 +1,7 @@
 package org.example.smarthealthcareappointmentsystem.controller;
 
 import org.example.smarthealthcareappointmentsystem.dto.RoleDTO;
-import org.example.smarthealthcareappointmentsystem.service.RoleService;
+import org.example.smarthealthcareappointmentsystem.service.Imp.RoleServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/role")
 public class RoleController {
     @Autowired
-    private RoleService roleService;
+    private RoleServiceImp roleServiceImp;
 
     @PostMapping("/")
     public ResponseEntity addRole(@RequestBody RoleDTO roleDTO){
         System.out.println("IN");
-        return ResponseEntity.ok(this.roleService.addRole(roleDTO));
+        return ResponseEntity.ok(this.roleServiceImp.addRole(roleDTO));
     }
 }

@@ -52,9 +52,10 @@ public class SecurityConfiguration {
         return http.csrf(csrf->csrf.disable())
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(
-                        (auth)->auth.requestMatchers("/api/v1/auth/**").permitAll()
-                                .requestMatchers("/api/v1/role/**").hasRole("ADMIN")
+                        (auth)->auth
+                                .requestMatchers("/api/v1/auth/**").permitAll()
                                 .requestMatchers(HttpMethod.GET,"/api/v1/**").permitAll()
+                                .requestMatchers("/api/v1/role/**").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.POST,"/api/v1/doctor/**").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.POST,"/api/v1/patient/**").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.POST,"/api/v1/appointment/**").hasRole("PATIENT")
