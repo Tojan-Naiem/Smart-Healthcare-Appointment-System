@@ -7,6 +7,7 @@ import org.example.smarthealthcareappointmentsystem.exception.ResourcesNotFound;
 import org.example.smarthealthcareappointmentsystem.model.Patient;
 import org.example.smarthealthcareappointmentsystem.model.Role;
 import org.example.smarthealthcareappointmentsystem.repository.PatientRepository;
+import org.example.smarthealthcareappointmentsystem.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class PatientServiceImp {
+public class PatientServiceImp implements PatientService {
     @Autowired
     private PatientRepository patientRepository;
     @Autowired

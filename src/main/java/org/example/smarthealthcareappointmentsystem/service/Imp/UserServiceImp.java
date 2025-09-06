@@ -3,6 +3,7 @@ package org.example.smarthealthcareappointmentsystem.service.Imp;
 import org.example.smarthealthcareappointmentsystem.dto.LoginRequest;
 import org.example.smarthealthcareappointmentsystem.model.User;
 import org.example.smarthealthcareappointmentsystem.repository.UserRepository;
+import org.example.smarthealthcareappointmentsystem.service.UserService;
 import org.example.smarthealthcareappointmentsystem.service.jwt.JWTService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImp {
+public class UserServiceImp implements UserService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
