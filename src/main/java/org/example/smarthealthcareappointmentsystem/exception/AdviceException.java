@@ -14,7 +14,12 @@ public class AdviceException {
     }
     @ExceptionHandler(AlreadyExistsException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    public String handleFound(AlreadyExistsException e){
+    public String handleNotFound(AlreadyExistsException e){
+        return e.getMessage();
+    }
+    @ExceptionHandler(ForbiddenActionException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public String handleNotFound(ForbiddenActionException e){
         return e.getMessage();
     }
 }

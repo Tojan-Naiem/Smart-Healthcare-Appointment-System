@@ -3,6 +3,7 @@ package org.example.smarthealthcareappointmentsystem.service.Imp;
 import org.example.smarthealthcareappointmentsystem.dto.AppointmentDTO;
 import org.example.smarthealthcareappointmentsystem.dto.UserMapper;
 import org.example.smarthealthcareappointmentsystem.exception.AlreadyExistsException;
+import org.example.smarthealthcareappointmentsystem.exception.ForbiddenActionException;
 import org.example.smarthealthcareappointmentsystem.exception.ResourcesNotFound;
 import org.example.smarthealthcareappointmentsystem.model.Appointment;
 import org.example.smarthealthcareappointmentsystem.model.Doctor;
@@ -89,6 +90,23 @@ public class AppointmentServiceImp implements AppointmentService {
         }
 
 
+
+    }
+
+    public void deleteAppointment(Long id){
+        Appointment appointment=this.appointmentRepository.findById(id).orElseThrow(
+                ()->{
+                    throw new ResourcesNotFound("The appointment id is not found");
+                }
+        );
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName=null;
+        if(!(authentication instanceof AnonymousAuthenticationToken)){
+            currentUserName=authentication.getName();
+        }
+        if(!currentUserName.equals(appointment.getPatient().getUsername()))
+            throw new ForbiddenActionException("You do not have permission to delete this appointment");
+        this.appointmentRepository.delete(appointment);
 
     }
 }
