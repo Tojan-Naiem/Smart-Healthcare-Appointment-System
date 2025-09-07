@@ -1,11 +1,10 @@
 package org.example.smarthealthcareappointmentsystem.dto;
 
-import org.example.smarthealthcareappointmentsystem.model.Appointment;
-import org.example.smarthealthcareappointmentsystem.model.Doctor;
-import org.example.smarthealthcareappointmentsystem.model.Patient;
-import org.example.smarthealthcareappointmentsystem.model.User;
+import org.example.smarthealthcareappointmentsystem.model.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
@@ -20,4 +19,18 @@ public interface UserMapper {
     AppointmentDTO toDTO(Appointment appointment);
 
     Appointment toEntity(AppointmentDTO appointmentDTO);
+
+
+    @Mapping(target = "id", ignore = true)
+    Prescription toEntity(PrescriptionDTO prescriptionDTO);
+
+    PrescriptionDTO toDTO(Prescription prescription);
+
+    // Medicine mapping
+    Medicine toMedicineEntity(MedicineDTO medicineDTO);
+    MedicineDTO toMedicineDTO(Medicine medicine);
+
+    // List mappings
+    List<Medicine> toMedicineEntities(List<MedicineDTO> medicineDTOs);
+    List<MedicineDTO> toMedicineDTOs(List<Medicine> medicines);
 }

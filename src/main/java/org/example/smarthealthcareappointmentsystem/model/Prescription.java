@@ -65,8 +65,5 @@ public class Prescription {
         this.issueDate = issueDate;
     }
 
-    private class Medicine{
-        private String medicineName;
-        private String dosage;
-    }
+
 }

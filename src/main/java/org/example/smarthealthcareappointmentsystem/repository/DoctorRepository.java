@@ -18,6 +18,6 @@ public interface DoctorRepository extends JpaRepository<Doctor,Long> {
     Optional<Doctor> findByEmail(String email);
 
     Page<Doctor> findBySpecialty(String specialty, Pageable pageable);
-
+    Optional<Doctor> findByUsername(String username);
 
 }

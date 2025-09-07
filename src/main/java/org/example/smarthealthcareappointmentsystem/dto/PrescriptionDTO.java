@@ -1,8 +1,5 @@
 package org.example.smarthealthcareappointmentsystem.dto;
 
-import jakarta.persistence.Id;
-import org.example.smarthealthcareappointmentsystem.model.Prescription;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -10,7 +7,7 @@ public class PrescriptionDTO {
 
     private Long patientId;
     private Long doctorId;
-    private List<Medicine> medicines;
+    private List<MedicineDTO> medicineDTOS;
     private String instructions;
     private LocalDate issueDate;
 
@@ -32,12 +29,12 @@ public class PrescriptionDTO {
         this.doctorId = doctorId;
     }
 
-    public List<Medicine> getMedicines() {
-        return medicines;
+    public List<MedicineDTO> getMedicines() {
+        return medicineDTOS;
     }
 
-    public void setMedicines(List<Medicine> medicines) {
-        this.medicines = medicines;
+    public void setMedicines(List<MedicineDTO> medicineDTOS) {
+        this.medicineDTOS = medicineDTOS;
     }
 
     public String getInstructions() {
@@ -56,8 +53,4 @@ public class PrescriptionDTO {
         this.issueDate = issueDate;
     }
 
-    private class Medicine{
-        private String medicineName;
-        private String dosage;
-    }
 }

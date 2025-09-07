@@ -1,0 +1,32 @@
+package org.example.smarthealthcareappointmentsystem.controller;
+
+import org.example.smarthealthcareappointmentsystem.dto.PrescriptionDTO;
+import org.example.smarthealthcareappointmentsystem.repository.PrescriptionRepository;
+import org.example.smarthealthcareappointmentsystem.service.Imp.PrescriptionServiceImp;
+import org.example.smarthealthcareappointmentsystem.service.PrescriptionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/v1/prescription")
+public class PrescriptionController {
+    @Autowired
+    private PrescriptionServiceImp prescriptionService;
+//    public PrescriptionController(PrescriptionServiceImp prescriptionService){
+//        this.prescriptionService=prescriptionService;
+//    }
+    @PostMapping("/")
+    public ResponseEntity<?>createPrescription(
+            @RequestBody PrescriptionDTO prescriptionDTO
+            ){
+        System.out.println("HHHI");
+        this.prescriptionService.createPrescription(prescriptionDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+
+    }
+}
