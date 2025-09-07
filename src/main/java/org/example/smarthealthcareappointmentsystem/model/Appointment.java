@@ -3,11 +3,7 @@ package org.example.smarthealthcareappointmentsystem.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
- enum Status {
-     SCHEDULED,
-     COMPLETED,
-     CANCELLED,
-}
+
 @Entity
 @Table(name="appointment")
 public class Appointment {

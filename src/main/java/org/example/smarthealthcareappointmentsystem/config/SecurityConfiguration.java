@@ -58,8 +58,12 @@ public class SecurityConfiguration {
                                 .requestMatchers("/api/v1/role/**").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.POST,"/api/v1/doctor/**").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.POST,"/api/v1/patient/**").hasRole("ADMIN")
+                                // appointment
+                                .requestMatchers(HttpMethod.PATCH,"/api/v1/appointment/**").hasRole("DOCTOR")
+
                                 .requestMatchers(HttpMethod.POST,"/api/v1/appointment/**").hasRole("PATIENT")
                                 .requestMatchers(HttpMethod.DELETE,"/api/v1/appointment/**").hasRole("PATIENT")
+
                                 .requestMatchers(HttpMethod.POST,"/api/v1/prescription/**").hasRole("DOCTOR")
                                 .anyRequest().authenticated()
                 )

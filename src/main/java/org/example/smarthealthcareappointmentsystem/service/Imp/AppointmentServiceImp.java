@@ -8,6 +8,7 @@ import org.example.smarthealthcareappointmentsystem.exception.ResourcesNotFound;
 import org.example.smarthealthcareappointmentsystem.model.Appointment;
 import org.example.smarthealthcareappointmentsystem.model.Doctor;
 import org.example.smarthealthcareappointmentsystem.model.Patient;
+import org.example.smarthealthcareappointmentsystem.model.Status;
 import org.example.smarthealthcareappointmentsystem.repository.AppointmentRepository;
 import org.example.smarthealthcareappointmentsystem.repository.DoctorRepository;
 import org.example.smarthealthcareappointmentsystem.repository.PatientRepository;
@@ -108,5 +109,23 @@ public class AppointmentServiceImp implements AppointmentService {
             throw new ForbiddenActionException("You do not have permission to delete this appointment");
         this.appointmentRepository.delete(appointment);
 
+    }
+
+    public void updateAppointment(Long id,String status){
+        Appointment appointment=this.appointmentRepository.findById(id).orElseThrow(
+                ()->{
+                    throw new ResourcesNotFound("The appointment id is not found");
+                }
+        );
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName=null;
+        if(!(authentication instanceof AnonymousAuthenticationToken)){
+            currentUserName=authentication.getName();
+        }
+        if(!currentUserName.equals(appointment.getDoctor().getUsername()))
+            throw new ForbiddenActionException("You do not have permission to delete this appointment");
+
+        appointment.setStatus(Status.COMPLETED);
+        this.appointmentRepository.save(appointment);
     }
 }
