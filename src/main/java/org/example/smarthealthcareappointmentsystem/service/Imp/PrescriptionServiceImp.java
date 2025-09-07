@@ -11,10 +11,13 @@ import org.example.smarthealthcareappointmentsystem.repository.DoctorRepository;
 import org.example.smarthealthcareappointmentsystem.repository.PatientRepository;
 import org.example.smarthealthcareappointmentsystem.repository.PrescriptionRepository;
 import org.example.smarthealthcareappointmentsystem.service.PrescriptionService;
+import org.springframework.data.domain.Page;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PrescriptionServiceImp implements PrescriptionService {
@@ -68,6 +71,23 @@ public class PrescriptionServiceImp implements PrescriptionService {
         this.prescriptionRepository.save(prescription);
 
 
+    }
+    public List<PrescriptionDTO> getPrescriptionsForPatient(){
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName=null;
+        if(!(authentication instanceof AnonymousAuthenticationToken)){
+            currentUserName=authentication.getName();
+        }
+        Patient patient=this.patientRepository.findByUsername(currentUserName)
+                .orElseThrow(
+                        ()->{
+                            throw new ResourcesNotFound("The patient username is not found");
+                        }
+                );
+
+        return this.prescriptionRepository.findByPatientId(patient.getId()).stream().map(
+                (m)-> userMapper.toDTO(m)
+                ).toList();
     }
 
 

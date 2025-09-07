@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/prescription")
 public class PrescriptionController {
-    @Autowired
     private PrescriptionServiceImp prescriptionService;
-//    public PrescriptionController(PrescriptionServiceImp prescriptionService){
-//        this.prescriptionService=prescriptionService;
-//    }
+    public PrescriptionController(PrescriptionServiceImp prescriptionService){
+        this.prescriptionService=prescriptionService;
+    }
     @PostMapping("/")
     public ResponseEntity createPrescription(@RequestBody PrescriptionDTO prescriptionDTO)
     {
@@ -31,8 +30,11 @@ public class PrescriptionController {
     }
 
     @GetMapping("/")
-    public ResponseEntity get(){
-        System.out.println("gkfjdsg");
-        return ResponseEntity.ok("GGGGGGGGGGGGGGGG");
+    public ResponseEntity getPrescriptionsForPatient(){
+
+        return new ResponseEntity<>(
+                this.prescriptionService.getPrescriptionsForPatient(),
+                HttpStatus.OK
+        );
     }
 }

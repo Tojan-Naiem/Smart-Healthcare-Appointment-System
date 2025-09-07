@@ -53,7 +53,6 @@ public class SecurityConfiguration {
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(
                         (auth)->auth
-                                .requestMatchers(HttpMethod.GET,"/api/v1/**").permitAll()
                                 .requestMatchers("/api/v1/auth/**").permitAll()
                                 .requestMatchers("/api/v1/role/**").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.POST,"/api/v1/doctor/**").hasRole("ADMIN")
@@ -65,6 +64,9 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.DELETE,"/api/v1/appointment/**").hasRole("PATIENT")
 
                                 .requestMatchers(HttpMethod.POST,"/api/v1/prescription/**").hasRole("DOCTOR")
+                                .requestMatchers(HttpMethod.GET,"/api/v1/prescription/**").hasRole("PATIENT")
+                                .requestMatchers(HttpMethod.GET,"/api/v1/**").permitAll()
+
                                 .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
