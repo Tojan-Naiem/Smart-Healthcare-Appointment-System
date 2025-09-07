@@ -90,8 +90,6 @@ public class AppointmentServiceImp implements AppointmentService {
             }
         }
 
-
-
     }
 
     public void deleteAppointment(Long id){
