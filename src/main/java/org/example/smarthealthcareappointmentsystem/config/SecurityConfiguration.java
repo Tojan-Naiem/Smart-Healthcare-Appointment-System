@@ -53,8 +53,8 @@ public class SecurityConfiguration {
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(
                         (auth)->auth
-                                .requestMatchers("/api/v1/auth/**").permitAll()
                                 .requestMatchers(HttpMethod.GET,"/api/v1/**").permitAll()
+                                .requestMatchers("/api/v1/auth/**").permitAll()
                                 .requestMatchers("/api/v1/role/**").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.POST,"/api/v1/doctor/**").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.POST,"/api/v1/patient/**").hasRole("ADMIN")

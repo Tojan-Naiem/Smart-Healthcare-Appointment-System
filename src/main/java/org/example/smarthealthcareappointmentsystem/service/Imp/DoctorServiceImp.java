@@ -37,7 +37,7 @@ public class DoctorServiceImp implements DoctorService {
         }
         Doctor doctor= userMapper.toEntity(registeredDoctor);
         doctor.setPassword(passwordEncoder.encode(registeredDoctor.getPassword()));
-        doctor.setRole(new Role(2,"DOCTOR"));
+        doctor.setRole(new Role(4,"DOCTOR"));
         doctor.setSpecialty(registeredDoctor.getSpecialty());
         this.doctorRepository.save(doctor);
     }
