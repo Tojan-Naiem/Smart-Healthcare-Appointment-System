@@ -11,6 +11,9 @@ import org.example.smarthealthcareappointmentsystem.repository.AppointmentReposi
 import org.example.smarthealthcareappointmentsystem.repository.DoctorRepository;
 import org.example.smarthealthcareappointmentsystem.repository.PatientRepository;
 import org.example.smarthealthcareappointmentsystem.service.AppointmentService;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -33,10 +36,17 @@ public class AppointmentServiceImp implements AppointmentService {
         this.userMapper=userMapper;
     }
     public AppointmentDTO createAppointment(AppointmentDTO appointmentDTO){
-        Patient patient=this.patientRepository.findById(appointmentDTO.getPatientId())
+
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName=null;
+        if(!(authentication instanceof AnonymousAuthenticationToken)){
+             currentUserName=authentication.getName();
+        }
+
+        Patient patient=this.patientRepository.findByUsername(currentUserName)
                 .orElseThrow(
                         ()->{
-                            throw new ResourcesNotFound("The patient id is not found");
+                            throw new ResourcesNotFound("The patient username is not found");
                         }
                 );
         Doctor doctor=this.doctorRepository.findById(appointmentDTO.getDoctorId())
@@ -45,12 +55,16 @@ public class AppointmentServiceImp implements AppointmentService {
                             throw new ResourcesNotFound("The doctor id is not found");
                         }
                 );
+
         checkConflict(doctor,appointmentDTO.getAppointmentDateTime(),appointmentDTO.getDuration());
         Appointment appointment=new Appointment();
         appointment.setDoctor(doctor);
         appointment.setPatient(patient);
         appointment.setNotes(appointmentDTO.getNotes());
+        appointment.setDuration(appointmentDTO.getDuration());
         appointment.setAppointmentDateTime(appointmentDTO.getAppointmentDateTime());
+
+        this.appointmentRepository.save(appointment);
 
         return userMapper.toDTO(appointment);
 
@@ -69,7 +83,7 @@ public class AppointmentServiceImp implements AppointmentService {
         for(Appointment a:appointments){
             LocalDateTime existStart=a.getAppointmentDateTime();
             LocalDateTime existEnd=existStart.plusMinutes(a.getDuration());
-            if(newEnd.isBefore(existStart)&&newStart.isAfter(existEnd)){
+            if (newStart.isBefore(existEnd) && newEnd.isAfter(existStart)) {
                 throw new AlreadyExistsException("There's already another appointment in this time");
             }
         }

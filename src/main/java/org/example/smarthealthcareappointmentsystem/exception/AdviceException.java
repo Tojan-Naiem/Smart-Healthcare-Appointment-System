@@ -12,4 +12,9 @@ public class AdviceException {
     public String handleNotFound(ResourcesNotFound e){
         return e.getMessage();
     }
+    @ExceptionHandler(AlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public String handleFound(AlreadyExistsException e){
+        return e.getMessage();
+    }
 }

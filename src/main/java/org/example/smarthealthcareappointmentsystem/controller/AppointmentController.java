@@ -2,6 +2,7 @@ package org.example.smarthealthcareappointmentsystem.controller;
 
 import org.example.smarthealthcareappointmentsystem.dto.AppointmentDTO;
 import org.example.smarthealthcareappointmentsystem.service.AppointmentService;
+import org.example.smarthealthcareappointmentsystem.service.Imp.AppointmentServiceImp;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,18 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/appointment")
+@RequestMapping("/api/v1/appointment")
 public class AppointmentController {
-    private AppointmentService appointmentService;
-    public AppointmentController(AppointmentService appointmentService){
+    private AppointmentServiceImp appointmentService;
+    public AppointmentController(AppointmentServiceImp appointmentService){
         this.appointmentService=appointmentService;
     }
     @PostMapping("/")
-    public ResponseEntity addAppointment(@RequestBody AppointmentDTO appointmentDTO){
-
+    public ResponseEntity<AppointmentDTO> addAppointment(@RequestBody AppointmentDTO appointmentDTO){
+       AppointmentDTO appointmentDTO1= this.appointmentService.createAppointment(appointmentDTO);
         return new ResponseEntity<>(
-                this.appointmentService.createAppointment(appointmentDTO),
+                appointmentDTO1,
                 HttpStatus.CREATED);
-
     }
 }
