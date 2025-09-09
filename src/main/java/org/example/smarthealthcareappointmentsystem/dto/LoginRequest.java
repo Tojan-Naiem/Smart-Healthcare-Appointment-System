@@ -1,5 +1,8 @@
 package org.example.smarthealthcareappointmentsystem.dto;
 
+/**
+ * represent the login request dto for the login
+ */
 public class LoginRequest {
     private String username;
     private String password;

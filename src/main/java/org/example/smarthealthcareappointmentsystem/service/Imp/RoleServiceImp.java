@@ -1,7 +1,7 @@
 package org.example.smarthealthcareappointmentsystem.service.Imp;
 
 import org.example.smarthealthcareappointmentsystem.dto.RoleDTO;
-import org.example.smarthealthcareappointmentsystem.model.Role;
+import org.example.smarthealthcareappointmentsystem.entity.Role;
 import org.example.smarthealthcareappointmentsystem.repository.RoleRepository;
 import org.example.smarthealthcareappointmentsystem.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;

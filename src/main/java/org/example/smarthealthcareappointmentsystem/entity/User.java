@@ -1,10 +1,13 @@
-package org.example.smarthealthcareappointmentsystem.model;
+package org.example.smarthealthcareappointmentsystem.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.time.LocalDate;
+
+/**
+ * Represents a user entity in the mySql database
+ * *
+ */
 
 @Entity
 @Table(name="users")
@@ -16,16 +19,43 @@ public class User  {
     private Long id;
     @Column(name="name",length = 50,nullable = false,unique = false)
     private String name;
+    /**
+     * The username for the user
+     * This field cannot be null and should be unique
+     */
+    @Column(nullable = false,unique = true)
     private String username;
+    /**
+     * The email for the user
+     * This field cannot be null and should be unique
+     */
+    @Column(nullable = false,unique = true)
     private String email;
+    /**
+     * The password for the user
+     * This field cannot be null
+     */
+    @Column(nullable = false)
     private String password;
+    /**
+     * The birthday can't be null
+     */
+    @Column(nullable = false)
     private LocalDate birthday;
-    @ManyToOne
+    /**
+     * The Role for the user
+     * This field cannot be null
+     */
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name="role_id")
     private Role role;
-public User(){
 
-}
+
+
+
+    public User(){
+
+    }
 
 
     public void setId(Long id) {

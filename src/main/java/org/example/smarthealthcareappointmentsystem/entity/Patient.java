@@ -1,4 +1,4 @@
-package org.example.smarthealthcareappointmentsystem.model;
+package org.example.smarthealthcareappointmentsystem.entity;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;

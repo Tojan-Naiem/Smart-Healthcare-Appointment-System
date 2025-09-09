@@ -1,4 +1,4 @@
-package org.example.smarthealthcareappointmentsystem.model;
+package org.example.smarthealthcareappointmentsystem.entity;
 
 public class Medicine{
     private String id;

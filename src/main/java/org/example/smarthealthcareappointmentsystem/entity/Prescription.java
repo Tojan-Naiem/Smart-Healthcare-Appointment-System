@@ -1,10 +1,9 @@
-package org.example.smarthealthcareappointmentsystem.model;
+package org.example.smarthealthcareappointmentsystem.entity;
 
 import jakarta.persistence.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Document(collection="Prescription")

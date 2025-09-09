@@ -1,7 +1,5 @@
 package org.example.smarthealthcareappointmentsystem.repository;
-import org.example.smarthealthcareappointmentsystem.model.Patient;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.example.smarthealthcareappointmentsystem.entity.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

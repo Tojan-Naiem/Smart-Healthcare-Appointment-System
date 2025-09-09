@@ -1,15 +1,13 @@
 package org.example.smarthealthcareappointmentsystem.repository;
 
-import org.example.smarthealthcareappointmentsystem.model.Doctor;
+import org.example.smarthealthcareappointmentsystem.entity.Doctor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.awt.print.Pageable;
 import java.time.LocalDate;
 import java.util.List;
 

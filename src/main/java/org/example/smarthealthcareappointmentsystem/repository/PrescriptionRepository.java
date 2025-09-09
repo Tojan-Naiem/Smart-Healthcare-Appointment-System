@@ -1,6 +1,6 @@
 package org.example.smarthealthcareappointmentsystem.repository;
 
-import org.example.smarthealthcareappointmentsystem.model.Prescription;
+import org.example.smarthealthcareappointmentsystem.entity.Prescription;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

@@ -1,9 +1,9 @@
 package org.example.smarthealthcareappointmentsystem.service.Imp;
 
 import org.example.smarthealthcareappointmentsystem.dto.UserMapper;
-import org.example.smarthealthcareappointmentsystem.model.Appointment;
-import org.example.smarthealthcareappointmentsystem.model.Doctor;
-import org.example.smarthealthcareappointmentsystem.model.Patient;
+import org.example.smarthealthcareappointmentsystem.entity.Appointment;
+import org.example.smarthealthcareappointmentsystem.entity.Doctor;
+import org.example.smarthealthcareappointmentsystem.entity.Patient;
 import org.example.smarthealthcareappointmentsystem.repository.AppointmentRepository;
 import org.example.smarthealthcareappointmentsystem.repository.DoctorRepository;
 import org.example.smarthealthcareappointmentsystem.repository.PatientRepository;
