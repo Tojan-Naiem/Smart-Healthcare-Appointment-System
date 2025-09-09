@@ -9,17 +9,25 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class AdviceException {
     @ExceptionHandler(ResourcesNotFound.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handleNotFound(ResourcesNotFound e){
+    public String handleNotFound(ResourcesNotFound e) {
         return e.getMessage();
     }
+
     @ExceptionHandler(AlreadyExistsException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
-    public String handleNotFound(AlreadyExistsException e){
+    public String handleNotFound(AlreadyExistsException e) {
         return e.getMessage();
     }
+
     @ExceptionHandler(ForbiddenActionException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    public String handleNotFound(ForbiddenActionException e){
+    public String handleNotFound(ForbiddenActionException e) {
+        return e.getMessage();
+    }
+
+    @ExceptionHandler(JWTException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public String handleNotFound(JWTException e) {
         return e.getMessage();
     }
 }

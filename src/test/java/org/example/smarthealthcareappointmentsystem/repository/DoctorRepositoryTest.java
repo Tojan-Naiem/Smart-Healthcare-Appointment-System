@@ -22,7 +22,7 @@ class DoctorRepositoryTest {
     public void setUP(){
         doctorRepository.deleteAll();
         Doctor doctor1 = new Doctor();
-        doctor1.setName("Ahmed");
+        doctor1.setFullName("Ahmed");
         doctor1.setUsername("ahmed123");
         doctor1.setEmail("ahmed@example.com");
         doctor1.setPassword("password1");
@@ -30,7 +30,7 @@ class DoctorRepositoryTest {
         doctor1.setSpecialty("Cardiology");
 
         Doctor doctor2 = new Doctor();
-        doctor2.setName("Sara");
+        doctor2.setFullName("Sara");
         doctor2.setUsername("sara90");
         doctor2.setEmail("sara@example.com");
         doctor2.setPassword("password2");
@@ -38,7 +38,7 @@ class DoctorRepositoryTest {
         doctor2.setSpecialty("Neurology");
 
         Doctor doctor3 = new Doctor();
-        doctor3.setName("Omar");
+        doctor3.setFullName("Omar");
         doctor3.setUsername("omar77");
         doctor3.setEmail("omar@example.com");
         doctor3.setPassword("password3");

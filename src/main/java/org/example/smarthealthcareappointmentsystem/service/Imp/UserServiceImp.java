@@ -6,7 +6,7 @@ import org.example.smarthealthcareappointmentsystem.exception.AlreadyExistsExcep
 import org.example.smarthealthcareappointmentsystem.repository.UserRepository;
 import org.example.smarthealthcareappointmentsystem.service.UserService;
 import org.example.smarthealthcareappointmentsystem.service.jwt.JWTService;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,14 +20,21 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserServiceImp implements UserService {
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
-    private AuthenticationManager authManager;
-    @Autowired
-    private JWTService jwtService;
+
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authManager;
+    private final JWTService jwtService;
+    public UserServiceImp(UserRepository userRepository,
+                          PasswordEncoder passwordEncoder,
+                          AuthenticationManager authManager,
+                          JWTService jwtService)
+    {
+        this.userRepository=userRepository;
+        this.passwordEncoder=passwordEncoder;
+        this.authManager=authManager;
+        this.jwtService=jwtService;
+    }
 
     /**
      * Register a {@link User}

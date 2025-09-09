@@ -18,7 +18,7 @@ public class User  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name="name",length = 50,nullable = false,unique = false)
-    private String name;
+    private String fullName;
     /**
      * The username for the user
      * This field cannot be null and should be unique
@@ -46,7 +46,7 @@ public class User  {
      * The Role for the user
      * This field cannot be null
      */
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name="role_id")
     private Role role;
 
@@ -66,12 +66,12 @@ public class User  {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {
@@ -118,7 +118,7 @@ public class User  {
     public String toString() {
         return "User{" +
                 "id='" + id + '\'' +
-                ", name='" + name + '\'' +
+                ", fullName='" + fullName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';

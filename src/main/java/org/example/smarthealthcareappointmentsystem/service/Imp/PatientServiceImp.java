@@ -66,7 +66,7 @@ public class PatientServiceImp implements PatientService {
             throw new ResourcesNotFound("The Patient is not found");
         }
         Patient updatedPatient =existsDoctor.get();
-        updatedPatient.setName(patientDTO.getName());
+        updatedPatient.setFullName(patientDTO.getName());
         updatedPatient.setBirthday(patientDTO.getBirthday());
         updatedPatient.setPassword(patientDTO.getPassword());
 

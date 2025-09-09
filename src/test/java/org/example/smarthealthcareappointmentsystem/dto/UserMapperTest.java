@@ -13,20 +13,20 @@ class UserMapperTest {
    @Test
    public void givenDoctorToDoctorDTO_whenMaps_thenCorrect(){
        Doctor doctor=new Doctor();
-       doctor.setName("Tojan");
+       doctor.setFullName("Tojan");
        doctor.setEmail("t@gmail.com");
        DoctorDTO doctorDTO=userMapper.toDTO(doctor);
-       assertEquals(doctorDTO.getName(),doctor.getName());
+       assertEquals(doctorDTO.getFullName(),doctor.getFullName());
        assertEquals(doctorDTO.getEmail(),doctor.getEmail());
 
    }
    @Test
    public void givenDoctorDTOToDoctor_whenMaps_thenCorrect(){
        DoctorDTO doctorDTO=new DoctorDTO();
-       doctorDTO.setName("Tojan");
+       doctorDTO.setFullName("Tojan");
        doctorDTO.setEmail("t@gmail.com");
        Doctor doctor=userMapper.toEntity(doctorDTO);
-       assertEquals(doctorDTO.getName(),doctor.getName());
+       assertEquals(doctorDTO.getFullName(),doctor.getFullName());
        assertEquals(doctorDTO.getEmail(),doctor.getEmail());
    }
 }

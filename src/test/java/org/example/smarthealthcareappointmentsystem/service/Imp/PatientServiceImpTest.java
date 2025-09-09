@@ -53,7 +53,7 @@ class PatientServiceImpTest {
         patient.setEmail(patientDTO.getEmail());
         patient.setPassword(patientDTO.getPassword());
         patient.setUsername(patientDTO.getUsername());
-        patient.setName(patientDTO.getName());
+        patient.setFullName(patientDTO.getName());
 
 
         when(userMapper.toEntity(patientDTO)).thenReturn(patient);
@@ -163,7 +163,7 @@ class PatientServiceImpTest {
         Patient doctor =new Patient();
         doctor.setEmail("t@gmail.com");
         doctor.setUsername("tt");
-        doctor.setName("Sawsan");
+        doctor.setFullName("Sawsan");
 
         //input patient
 
@@ -177,7 +177,7 @@ class PatientServiceImpTest {
         Patient updatedPatient =new Patient();
         updatedPatient.setEmail("t@gmail.com");
         updatedPatient.setUsername("tt");
-        updatedPatient.setName("Tojan");
+        updatedPatient.setFullName("Tojan");
 
         when(this.patientRepository.findByEmail("t@gmail.com")).thenReturn(Optional.of(doctor));
         when(this.userMapper.toDTO(any(Patient.class))).thenReturn(patientDTO);
@@ -198,7 +198,7 @@ class PatientServiceImpTest {
         Patient doctor =new Patient();
         doctor.setEmail("t@gmail.com");
         doctor.setUsername("tt");
-        doctor.setName("Sawsan");
+        doctor.setFullName("Sawsan");
         doctor.setId(1L);
 
         //input doctor

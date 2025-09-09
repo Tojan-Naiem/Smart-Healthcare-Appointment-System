@@ -4,6 +4,9 @@ import org.example.smarthealthcareappointmentsystem.dto.DoctorDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+/**
+ * Doctor Service interface contains method for {@link org.example.smarthealthcareappointmentsystem.entity.Doctor}
+ */
 public interface DoctorService {
 
 

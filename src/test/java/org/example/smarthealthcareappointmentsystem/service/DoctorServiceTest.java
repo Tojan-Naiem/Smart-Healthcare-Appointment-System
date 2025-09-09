@@ -9,6 +9,7 @@ import org.example.smarthealthcareappointmentsystem.repository.DoctorRepository;
 import org.example.smarthealthcareappointmentsystem.service.Imp.DoctorServiceImp;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,6 +18,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,7 +26,7 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class DoctorServiceTest {
-    @Autowired
+    @InjectMocks
     private DoctorServiceImp doctorService;
     @Mock
     private DoctorRepository doctorRepository;
@@ -39,11 +41,12 @@ class DoctorServiceTest {
     public void addValidDoctor_thenCorrect(){
         //create a doctor dto to send it to the addDoctor method
         DoctorDTO doctorDTO=new DoctorDTO();
-        doctorDTO.setName("test");
+        doctorDTO.setFullName("test");
         doctorDTO.setEmail("test@gmail.com");
         doctorDTO.setPassword("test123");
         doctorDTO.setUsername("tst");
         doctorDTO.setSpecialty("Cardiology");
+        doctorDTO.setBirthday(LocalDate.of(2000,5,1));
 
         // when they called in addDoctor
         when(doctorRepository.existsByEmail("test@gmail.com")).thenReturn(false);
@@ -54,7 +57,8 @@ class DoctorServiceTest {
         doctor.setPassword(doctorDTO.getPassword());
         doctor.setSpecialty(doctorDTO.getSpecialty());
         doctor.setUsername(doctorDTO.getUsername());
-        doctor.setName(doctorDTO.getName());
+        doctor.setFullName(doctorDTO.getFullName());
+        doctor.setBirthday(doctorDTO.getBirthday());
 
 
         when(userMapper.toEntity(doctorDTO)).thenReturn(doctor);
@@ -74,7 +78,7 @@ class DoctorServiceTest {
     @Test
     public void addVDoctor_WithExistEmail_throwException() {
         DoctorDTO doctorDTO=new DoctorDTO();
-        doctorDTO.setName("test");
+        doctorDTO.setFullName("test");
         doctorDTO.setEmail("test@gmail.com");
         doctorDTO.setPassword("test123");
         doctorDTO.setUsername("tst");
@@ -92,11 +96,12 @@ class DoctorServiceTest {
     public void addVDoctor_WithExistUsername_throwException() {
 
         DoctorDTO doctorDTO=new DoctorDTO();
-        doctorDTO.setName("test");
+        doctorDTO.setFullName("test");
         doctorDTO.setEmail("test@gmail.com");
         doctorDTO.setPassword("test123");
         doctorDTO.setUsername("tst");
         doctorDTO.setSpecialty("Cardiology");
+        doctorDTO.setBirthday(LocalDate.of(2000,5,1));
 
         // when they called in addDoctor
         when(doctorRepository.existsByUsername("tst")).thenReturn(true);
@@ -198,21 +203,21 @@ class DoctorServiceTest {
         Doctor doctor=new Doctor();
         doctor.setEmail("t@gmail.com");
         doctor.setUsername("tt");
-        doctor.setName("Sawsan");
+        doctor.setFullName("Sawsan");
 
         //input doctor
 
         DoctorDTO doctorDTO=new DoctorDTO();
         doctorDTO.setEmail("t@gmail.com");
         doctorDTO.setUsername("tt");
-        doctorDTO.setName("Tojan");
+        doctorDTO.setFullName("Tojan");
 
         // update doctor
 
         Doctor updatedDoctor=new Doctor();
         updatedDoctor.setEmail("t@gmail.com");
         updatedDoctor.setUsername("tt");
-        updatedDoctor.setName("Tojan");
+        updatedDoctor.setFullName("Tojan");
 
         when(this.doctorRepository.findByEmail("t@gmail.com")).thenReturn(Optional.of(doctor));
         when(this.userMapper.toDTO(any(Doctor.class))).thenReturn(doctorDTO);
@@ -223,7 +228,7 @@ class DoctorServiceTest {
 
         assertEquals(returnedDoctorDTO.getEmail(),doctorDTO.getEmail());
         assertEquals(returnedDoctorDTO.getUsername(),doctorDTO.getUsername());
-        assertEquals(returnedDoctorDTO.getName(),doctorDTO.getName());
+        assertEquals(returnedDoctorDTO.getFullName(),doctorDTO.getFullName());
         verify(doctorRepository).findByEmail("t@gmail.com");
 
     }
@@ -233,7 +238,7 @@ class DoctorServiceTest {
         Doctor doctor=new Doctor();
         doctor.setEmail("t@gmail.com");
         doctor.setUsername("tt");
-        doctor.setName("Sawsan");
+        doctor.setFullName("Sawsan");
         doctor.setId(1L);
 
         //input doctor
@@ -241,7 +246,7 @@ class DoctorServiceTest {
         DoctorDTO doctorDTO=new DoctorDTO();
         doctorDTO.setEmail("tt@gmail.com");
         doctorDTO.setUsername("tt");
-        doctorDTO.setName("Tojan");
+        doctorDTO.setFullName("Tojan");
 
 
         when(this.doctorRepository.findByEmail("tt@gmail.com")).thenReturn(Optional.empty());
@@ -260,7 +265,7 @@ class DoctorServiceTest {
         Doctor doctor=new Doctor();
         doctor.setEmail("t@gmail.com");
         doctor.setUsername("tt");
-        doctor.setName("Sawsan");
+        doctor.setFullName("Sawsan");
         doctor.setId(1L);
 
         when(this.doctorRepository.findById(1L)).thenReturn(Optional.of(doctor));
@@ -275,7 +280,7 @@ class DoctorServiceTest {
         Doctor doctor=new Doctor();
         doctor.setEmail("t@gmail.com");
         doctor.setUsername("tt");
-        doctor.setName("Sawsan");
+        doctor.setFullName("Sawsan");
         doctor.setId(1L);
 
         when(this.doctorRepository.findById(2L)).thenReturn(Optional.empty());
