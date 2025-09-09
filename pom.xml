@@ -11,7 +11,7 @@
     <groupId>org.example</groupId>
     <artifactId>Smart-Healthcare-Appointment-System</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <fullName>Smart-Healthcare-Appointment-System</fullName>
+    <name>Smart-Healthcare-Appointment-System</name>
     <description>Smart-Healthcare-Appointment-System</description>
     <url/>
     <licenses>
@@ -130,6 +130,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
+
 
     </dependencies>
 

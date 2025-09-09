@@ -9,6 +9,8 @@ import org.example.smarthealthcareappointmentsystem.entity.Role;
 import org.example.smarthealthcareappointmentsystem.repository.DoctorRepository;
 import org.example.smarthealthcareappointmentsystem.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -37,7 +39,7 @@ public class DoctorServiceImp implements DoctorService {
      * Check if the email is already used or not and the username and if it is throw an exception
      * @param registeredDoctor contains doctor info
      */
-
+    @CacheEvict(value="doctors",key="#root.methodName",allEntries = true)
     public void addDoctor(DoctorDTO registeredDoctor){
         boolean isExistByEmail=this.doctorRepository.existsByEmail(registeredDoctor.getEmail());
         boolean isExistByUsername=this.doctorRepository.existsByUsername(registeredDoctor.getUsername());
@@ -62,7 +64,8 @@ public class DoctorServiceImp implements DoctorService {
      * @param filterValue to filters the result
      * @return a list of page contains the doctorDTO
      */
-
+    @Override
+    @Cacheable(value="doctors",key="#root.methodName+'_'+#pageable.pageNumber+'_'+#pageable.pageSize+'_'+#filterKey+'_'+#filterValue")
     public Page<DoctorDTO> getDoctors(Pageable pageable,String filterKey,String filterValue){
         Page<Doctor> doctors=null;
 
@@ -89,6 +92,8 @@ public class DoctorServiceImp implements DoctorService {
      * @param id for the doctor
      * @return doctorDTO
      */
+    @Cacheable(value="doctors",key="#root.methodName+'_'+#id")
+
     public DoctorDTO getDoctorById(Long id){
        return userMapper.toDTO(
                this.doctorRepository.findById(id).orElseThrow(
@@ -124,6 +129,7 @@ public class DoctorServiceImp implements DoctorService {
      * check if the doctor is in or not and if it's not throw an exception
      * @param id for the doctor
      */
+
     public void deleteDoctor(Long id){
         Doctor existsDoctor=this.doctorRepository.findById(id).orElseThrow(
                 ()->{throw  new ResourcesNotFound("Doctor id is not found");}

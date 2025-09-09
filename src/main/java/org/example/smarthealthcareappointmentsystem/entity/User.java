@@ -1,6 +1,7 @@
 package org.example.smarthealthcareappointmentsystem.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.time.LocalDate;
 
@@ -13,6 +14,8 @@ import java.time.LocalDate;
 @Table(name="users")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "user_type")
+//@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+
 public class User  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

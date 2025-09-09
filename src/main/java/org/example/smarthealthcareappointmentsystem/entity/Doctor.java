@@ -1,8 +1,11 @@
 package org.example.smarthealthcareappointmentsystem.entity;
 
+import jakarta.persistence.Cacheable;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * Represents a doctor entity in the mySql database
@@ -12,6 +15,7 @@ import jakarta.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("doctor")
+@Cacheable
 public class Doctor extends User{
     /**
      * The specialty for the doctor
