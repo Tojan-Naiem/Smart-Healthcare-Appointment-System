@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name="role")
-public class Role {
+public class Role  {
     @Id
     @GeneratedValue
     private int id;

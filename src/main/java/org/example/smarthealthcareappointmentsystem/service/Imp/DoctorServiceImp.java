@@ -10,6 +10,7 @@ import org.example.smarthealthcareappointmentsystem.repository.DoctorRepository;
 import org.example.smarthealthcareappointmentsystem.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,7 +40,7 @@ public class DoctorServiceImp implements DoctorService {
      * Check if the email is already used or not and the username and if it is throw an exception
      * @param registeredDoctor contains doctor info
      */
-    @CacheEvict(value="doctors",key="#root.methodName",allEntries = true)
+    @CachePut(value="doctors",key="#root.methodName")
     public void addDoctor(DoctorDTO registeredDoctor){
         boolean isExistByEmail=this.doctorRepository.existsByEmail(registeredDoctor.getEmail());
         boolean isExistByUsername=this.doctorRepository.existsByUsername(registeredDoctor.getUsername());

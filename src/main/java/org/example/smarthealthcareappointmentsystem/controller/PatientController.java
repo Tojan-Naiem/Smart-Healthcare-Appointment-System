@@ -9,6 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * REST Controller for handling Patients operations.
+ * Provides endpoints for create/get/getById/update/delete patients
+ */
 @RestController
 @RequestMapping("/api/v1/patient")
 public class PatientController {
@@ -17,11 +21,25 @@ public class PatientController {
     public PatientController(PatientServiceImp patientServiceImp){
         this.patientServiceImp = patientServiceImp;
     }
+
+    /**
+     * Create patient account
+     * @param patientDTO for creating the account
+     * @return msg successfully and created status code
+     */
+
     @PostMapping("/")
-    public ResponseEntity<?> addPatient(@RequestBody PatientDTO patientDTO){
+    public ResponseEntity<?> addPatient(@RequestBody PatientDTO patientDTO) {
         this.patientServiceImp.addPatient(patientDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return new ResponseEntity<>("Successfully created patient account!", HttpStatus.CREATED);
     }
+
+    /**
+     * Get All patients
+     * @param page of patients
+     * @param size of patients
+     * @return page of a list patients
+     */
     @GetMapping("/")
     public ResponseEntity<Page<PatientDTO>> getPatients(
             @RequestParam(value = "page", required = false , defaultValue = "0")int page,
@@ -32,10 +50,23 @@ public class PatientController {
         return ResponseEntity.ok(patientDTOS);
     }
 
+    /**
+     * Get Patient by id
+     * @param id patient id
+     * @return patient dto
+     */
+
     @GetMapping("/{id}")
     public ResponseEntity<PatientDTO> getPatientById(@PathVariable Long id){
         return ResponseEntity.ok(this.patientServiceImp.getPatientById(id));
     }
+
+    /**
+     * Update patient info
+     * @param id for patient
+     * @param patientDTO the updated patient info
+     * @return the updated patient
+     */
     @PutMapping("/{id}")
     public ResponseEntity<PatientDTO> updatePatient(@PathVariable Long id,@RequestBody PatientDTO patientDTO){
         return ResponseEntity.ok(this.patientServiceImp.updatePatient(id,patientDTO));

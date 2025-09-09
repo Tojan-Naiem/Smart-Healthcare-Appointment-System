@@ -1,21 +1,31 @@
 package org.example.smarthealthcareappointmentsystem.dto;
 
+import jakarta.persistence.Column;
+
 import java.time.LocalDate;
 
+/**
+ * Represents Patient dto
+ */
 public class PatientDTO {
-    private String name;
+    @Column(length = 50,nullable = false)
+    private String fullName;
+    @Column(nullable = false,unique = true)
     private String username;
+    @Column(nullable = false,unique = true)
     private String email;
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
     private LocalDate birthday;
 
     public PatientDTO(){
 
     }
 
-    public PatientDTO(String name, String username, String email, String password, LocalDate birthday) {
+    public PatientDTO(String fullName, String username, String email, String password, LocalDate birthday) {
         this.birthday=birthday;
-        this.name=name;
+        this.fullName=fullName;
         this.email=email;
         this.password=password;
 
@@ -38,12 +48,12 @@ public class PatientDTO {
         this.email = email;
     }
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullName(String name) {
+        this.fullName = name;
     }
 
     public String getPassword() {

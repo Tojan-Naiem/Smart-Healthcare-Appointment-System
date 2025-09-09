@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import java.io.Serializable;
+
 /**
  * Represents a doctor entity in the mySql database
  * It's extend from the User entity
@@ -16,7 +18,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @DiscriminatorValue("doctor")
 @Cacheable
-public class Doctor extends User{
+public class Doctor extends User implements Serializable {
     /**
      * The specialty for the doctor
      * This field cannot be null and should be less than 100 characters

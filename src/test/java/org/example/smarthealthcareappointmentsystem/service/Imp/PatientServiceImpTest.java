@@ -40,7 +40,7 @@ class PatientServiceImpTest {
     public void addValidPatient_thenCorrect(){
         //create a patient dto to send it to the addDoctor method
         PatientDTO patientDTO =new PatientDTO();
-        patientDTO.setName("test");
+        patientDTO.setFullName("test");
         patientDTO.setEmail("test@gmail.com");
         patientDTO.setPassword("test123");
         patientDTO.setUsername("tst");
@@ -53,7 +53,7 @@ class PatientServiceImpTest {
         patient.setEmail(patientDTO.getEmail());
         patient.setPassword(patientDTO.getPassword());
         patient.setUsername(patientDTO.getUsername());
-        patient.setFullName(patientDTO.getName());
+        patient.setFullName(patientDTO.getFullName());
 
 
         when(userMapper.toEntity(patientDTO)).thenReturn(patient);
@@ -73,7 +73,7 @@ class PatientServiceImpTest {
     @Test
     public void addPatient_WithExistEmail_throwException() {
         PatientDTO patientDTO =new PatientDTO();
-        patientDTO.setName("test");
+        patientDTO.setFullName("test");
         patientDTO.setEmail("test@gmail.com");
         patientDTO.setPassword("test123");
         patientDTO.setUsername("tst");
@@ -90,7 +90,7 @@ class PatientServiceImpTest {
     public void addPatient_WithExistUsername_throwException() {
 
         PatientDTO patientDTO =new PatientDTO();
-        patientDTO.setName("test");
+        patientDTO.setFullName("test");
         patientDTO.setEmail("test@gmail.com");
         patientDTO.setPassword("test123");
         patientDTO.setUsername("tst");
@@ -170,7 +170,7 @@ class PatientServiceImpTest {
         PatientDTO patientDTO =new PatientDTO();
         patientDTO.setEmail("t@gmail.com");
         patientDTO.setUsername("tt");
-        patientDTO.setName("Tojan");
+        patientDTO.setFullName("Tojan");
 
         // update patient
 
@@ -188,7 +188,7 @@ class PatientServiceImpTest {
 
         assertEquals(returnedDoctorDTO.getEmail(), patientDTO.getEmail());
         assertEquals(returnedDoctorDTO.getUsername(), patientDTO.getUsername());
-        assertEquals(returnedDoctorDTO.getName(), patientDTO.getName());
+        assertEquals(returnedDoctorDTO.getFullName(), patientDTO.getFullName());
         verify(patientRepository).findByEmail("t@gmail.com");
 
     }
@@ -206,7 +206,7 @@ class PatientServiceImpTest {
         PatientDTO patientDTO =new PatientDTO();
         patientDTO.setEmail("tt@gmail.com");
         patientDTO.setUsername("tt");
-        patientDTO.setName("Tojan");
+        patientDTO.setFullName("Tojan");
 
 
         when(this.patientRepository.findByEmail("tt@gmail.com")).thenReturn(Optional.empty());
