@@ -76,7 +76,8 @@ public class AppointmentServiceImp implements AppointmentService {
         appointment.setNotes(appointmentDTO.getNotes());
         appointment.setDuration(appointmentDTO.getDuration());
         appointment.setAppointmentDateTime(appointmentDTO.getAppointmentDateTime());
-        this.notificationService.sendEmail(patient);
+        this.notificationService.sendEmail(patient.getEmail());
+        this.notificationService.sendEmail(doctor.getEmail());
         this.appointmentRepository.save(appointment);
 
 

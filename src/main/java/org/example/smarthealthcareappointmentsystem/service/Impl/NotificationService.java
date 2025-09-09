@@ -13,12 +13,12 @@ public class NotificationService {
     public NotificationService(JavaMailSender javaMailSender){
         this.javaMailSender=javaMailSender;
     }
-    public void sendEmail(Patient patient){
+    public void sendEmail(String email){
         SimpleMailMessage mail=new SimpleMailMessage();
-        mail.setTo(patient.getEmail());
+        mail.setTo(email);
         mail.setFrom("tojan050@gmail.com");
-        mail.setText("New appointment has been subscribed to you ! check your portal ! ");
-        mail.setSubject("New appointment has been subscribed to you !");
+        mail.setText("A new appointment has been subscribed to you! Check your portal.");
+        mail.setSubject("New appointment has been scheduled!");
         try {
             javaMailSender.send(mail);
         } catch (MailException e) {
