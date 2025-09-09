@@ -2,7 +2,7 @@ package org.example.smarthealthcareappointmentsystem.controller;
 
 import org.example.smarthealthcareappointmentsystem.dto.LoginRequest;
 import org.example.smarthealthcareappointmentsystem.entity.User;
-import org.example.smarthealthcareappointmentsystem.service.Imp.UserServiceImp;
+import org.example.smarthealthcareappointmentsystem.service.Impl.UserServiceImp;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

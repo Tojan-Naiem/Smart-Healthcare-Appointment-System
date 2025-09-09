@@ -7,4 +7,5 @@ import org.example.smarthealthcareappointmentsystem.dto.AppointmentDTO;
 public interface AppointmentService {
      void createAppointment(AppointmentDTO appointmentDTO);
      void deleteAppointment(Long id);
+     public void updateAppointment(Long id,String status);
 }

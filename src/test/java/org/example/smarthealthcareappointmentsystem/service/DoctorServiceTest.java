@@ -6,12 +6,11 @@ import org.example.smarthealthcareappointmentsystem.exception.AlreadyExistsExcep
 import org.example.smarthealthcareappointmentsystem.exception.ResourcesNotFound;
 import org.example.smarthealthcareappointmentsystem.entity.Doctor;
 import org.example.smarthealthcareappointmentsystem.repository.DoctorRepository;
-import org.example.smarthealthcareappointmentsystem.service.Imp.DoctorServiceImp;
+import org.example.smarthealthcareappointmentsystem.service.Impl.DoctorServiceImp;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

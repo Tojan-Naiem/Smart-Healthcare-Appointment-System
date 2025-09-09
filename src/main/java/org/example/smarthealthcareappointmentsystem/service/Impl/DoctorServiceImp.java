@@ -1,4 +1,4 @@
-package org.example.smarthealthcareappointmentsystem.service.Imp;
+package org.example.smarthealthcareappointmentsystem.service.Impl;
 
 import org.example.smarthealthcareappointmentsystem.dto.UserMapper;
 import org.example.smarthealthcareappointmentsystem.dto.DoctorDTO;
@@ -8,8 +8,6 @@ import org.example.smarthealthcareappointmentsystem.entity.Doctor;
 import org.example.smarthealthcareappointmentsystem.entity.Role;
 import org.example.smarthealthcareappointmentsystem.repository.DoctorRepository;
 import org.example.smarthealthcareappointmentsystem.service.DoctorService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;

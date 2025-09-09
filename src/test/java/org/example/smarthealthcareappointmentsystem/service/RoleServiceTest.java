@@ -3,7 +3,7 @@ package org.example.smarthealthcareappointmentsystem.service;
 import org.example.smarthealthcareappointmentsystem.dto.RoleDTO;
 import org.example.smarthealthcareappointmentsystem.entity.Role;
 import org.example.smarthealthcareappointmentsystem.repository.RoleRepository;
-import org.example.smarthealthcareappointmentsystem.service.Imp.RoleServiceImp;
+import org.example.smarthealthcareappointmentsystem.service.Impl.RoleServiceImp;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

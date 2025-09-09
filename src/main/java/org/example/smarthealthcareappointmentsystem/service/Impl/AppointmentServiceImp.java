@@ -1,4 +1,4 @@
-package org.example.smarthealthcareappointmentsystem.service.Imp;
+package org.example.smarthealthcareappointmentsystem.service.Impl;
 
 /**
  * Implementation of the {@link org.example.smarthealthcareappointmentsystem.service.AppointmentService} interface
@@ -26,20 +26,20 @@ import java.time.LocalDateTime;
 import java.util.List;
 @Service
 public class AppointmentServiceImp implements AppointmentService {
-    private AppointmentRepository appointmentRepository;
-    private PatientRepository patientRepository;
-    private DoctorRepository doctorRepository;
-    private UserMapper userMapper;
+    private final AppointmentRepository appointmentRepository;
+    private final PatientRepository patientRepository;
+    private  final DoctorRepository doctorRepository;
+    private final NotificationService notificationService;
     public AppointmentServiceImp (
             AppointmentRepository appointmentRepository,
             PatientRepository patientRepository,
             DoctorRepository doctorRepository,
-            UserMapper userMapper
-            ){
+            NotificationService notificationService
+    ){
         this.appointmentRepository=appointmentRepository;
         this.doctorRepository=doctorRepository;
         this.patientRepository=patientRepository;
-        this.userMapper=userMapper;
+        this.notificationService = notificationService;
     }
 
     /**
@@ -76,7 +76,7 @@ public class AppointmentServiceImp implements AppointmentService {
         appointment.setNotes(appointmentDTO.getNotes());
         appointment.setDuration(appointmentDTO.getDuration());
         appointment.setAppointmentDateTime(appointmentDTO.getAppointmentDateTime());
-
+        this.notificationService.sendEmail(patient);
         this.appointmentRepository.save(appointment);
 
 
@@ -130,6 +130,8 @@ public class AppointmentServiceImp implements AppointmentService {
         }
         if(!currentUserName.equals(appointment.getPatient().getUsername()))
             throw new ForbiddenActionException("You do not have permission to delete this appointment");
+
+
         this.appointmentRepository.delete(appointment);
 
     }

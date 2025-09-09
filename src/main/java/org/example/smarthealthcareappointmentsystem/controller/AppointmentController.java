@@ -2,8 +2,7 @@ package org.example.smarthealthcareappointmentsystem.controller;
 
 import org.example.smarthealthcareappointmentsystem.dto.AppointmentDTO;
 import org.example.smarthealthcareappointmentsystem.dto.UpdateAppointmentStatusRequest;
-import org.example.smarthealthcareappointmentsystem.service.AppointmentService;
-import org.example.smarthealthcareappointmentsystem.service.Imp.AppointmentServiceImp;
+import org.example.smarthealthcareappointmentsystem.service.Impl.AppointmentServiceImp;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +27,7 @@ public class AppointmentController {
 
     @PostMapping("/")
     public ResponseEntity<?> addAppointment(@RequestBody AppointmentDTO appointmentDTO) {
+        System.out.println("HIIIIII");
       this.appointmentService.createAppointment(appointmentDTO);
         return new ResponseEntity<>(
                 "Successfully created the appointment!",

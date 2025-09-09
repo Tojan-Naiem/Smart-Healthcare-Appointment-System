@@ -1,4 +1,4 @@
-package org.example.smarthealthcareappointmentsystem.service.Imp;
+package org.example.smarthealthcareappointmentsystem.service.Impl;
 
 import org.example.smarthealthcareappointmentsystem.dto.LoginRequest;
 import org.example.smarthealthcareappointmentsystem.entity.User;

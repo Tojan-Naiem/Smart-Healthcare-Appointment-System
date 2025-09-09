@@ -1,16 +1,13 @@
-package org.example.smarthealthcareappointmentsystem.service.Imp;
+package org.example.smarthealthcareappointmentsystem.service.Impl;
 
 import org.example.smarthealthcareappointmentsystem.dto.PatientDTO;
 import org.example.smarthealthcareappointmentsystem.dto.UserMapper;
-import org.example.smarthealthcareappointmentsystem.entity.Doctor;
 import org.example.smarthealthcareappointmentsystem.exception.AlreadyExistsException;
 import org.example.smarthealthcareappointmentsystem.exception.ResourcesNotFound;
 import org.example.smarthealthcareappointmentsystem.entity.Patient;
 import org.example.smarthealthcareappointmentsystem.entity.Role;
 import org.example.smarthealthcareappointmentsystem.repository.PatientRepository;
-import org.example.smarthealthcareappointmentsystem.service.DoctorService;
 import org.example.smarthealthcareappointmentsystem.service.PatientService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -1,10 +1,7 @@
 package org.example.smarthealthcareappointmentsystem.controller;
 
 import org.example.smarthealthcareappointmentsystem.dto.PrescriptionDTO;
-import org.example.smarthealthcareappointmentsystem.repository.PrescriptionRepository;
-import org.example.smarthealthcareappointmentsystem.service.Imp.PrescriptionServiceImp;
-import org.example.smarthealthcareappointmentsystem.service.PrescriptionService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.example.smarthealthcareappointmentsystem.service.Impl.PrescriptionServiceImp;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

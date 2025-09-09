@@ -1,8 +1,7 @@
 package org.example.smarthealthcareappointmentsystem.controller;
 
 import org.example.smarthealthcareappointmentsystem.dto.DoctorDTO;
-import org.example.smarthealthcareappointmentsystem.service.Imp.DoctorServiceImp;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.example.smarthealthcareappointmentsystem.service.Impl.DoctorServiceImp;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

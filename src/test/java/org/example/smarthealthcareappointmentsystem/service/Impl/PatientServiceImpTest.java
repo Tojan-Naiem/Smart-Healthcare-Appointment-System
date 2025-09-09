@@ -1,4 +1,4 @@
-package org.example.smarthealthcareappointmentsystem.service.Imp;
+package org.example.smarthealthcareappointmentsystem.service.Impl;
 
 import org.example.smarthealthcareappointmentsystem.dto.PatientDTO;
 import org.example.smarthealthcareappointmentsystem.dto.UserMapper;

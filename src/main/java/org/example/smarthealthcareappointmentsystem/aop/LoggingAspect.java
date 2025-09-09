@@ -15,12 +15,12 @@ import java.util.Objects;
 @Component
 public class LoggingAspect {
     private static final Logger logger= LoggerFactory.getLogger(LoggingAspect.class);
-    @AfterReturning("execution(* org.example.smarthealthcareappointmentsystem.service.Imp.AppointmentServiceImp.*.*(..))")
+    @AfterReturning("execution(* org.example.smarthealthcareappointmentsystem.service.Impl.AppointmentServiceImp.*.*(..))")
     public void logBookingMethods(JoinPoint joinPoint){
         System.out.println("Booking method called : "+joinPoint.getSignature());
 
     }
-    @AfterReturning("execution(* org.example.smarthealthcareappointmentsystem.service.Imp.PrescriptionServiceImp.*.*(..))")
+    @AfterReturning("execution(* org.example.smarthealthcareappointmentsystem.service.Impl.PrescriptionServiceImp.*.*(..))")
     public void logPrescriptionMethods(JoinPoint joinPoint){
         System.out.println("Prescription method called : "+joinPoint.getSignature());
     }
