@@ -4,12 +4,14 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represent an appointment dto
+ */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class AppointmentDTO {
-    private Long id;
 
     private Long patientId;
     private Long doctorId;

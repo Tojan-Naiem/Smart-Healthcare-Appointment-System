@@ -1,12 +1,16 @@
 package org.example.smarthealthcareappointmentsystem.repository;
 
 import org.example.smarthealthcareappointmentsystem.entity.Appointment;
+import org.example.smarthealthcareappointmentsystem.entity.Doctor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
+/**
+ * Appointment repository interface for managing {@link Appointment} entity
+ * Extends {@link JpaRepository} to provide the jpa for the doctor entity
+ */
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment,Long> {
 

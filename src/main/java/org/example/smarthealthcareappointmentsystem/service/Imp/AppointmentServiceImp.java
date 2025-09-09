@@ -1,5 +1,9 @@
 package org.example.smarthealthcareappointmentsystem.service.Imp;
 
+/**
+ * Implementation of the {@link org.example.smarthealthcareappointmentsystem.service.AppointmentService} interface
+ * Provides business logic for managing {@link org.example.smarthealthcareappointmentsystem.entity.Appointment}entity
+ */
 import org.example.smarthealthcareappointmentsystem.dto.AppointmentDTO;
 import org.example.smarthealthcareappointmentsystem.dto.UserMapper;
 import org.example.smarthealthcareappointmentsystem.exception.AlreadyExistsException;
@@ -37,7 +41,14 @@ public class AppointmentServiceImp implements AppointmentService {
         this.patientRepository=patientRepository;
         this.userMapper=userMapper;
     }
-    public AppointmentDTO createAppointment(AppointmentDTO appointmentDTO){
+
+    /**
+     * Create appointment
+     * Check the authentication
+     * @param appointmentDTO to create
+     *
+     */
+    public void createAppointment(AppointmentDTO appointmentDTO){
 
         Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
         String currentUserName=null;
@@ -68,9 +79,15 @@ public class AppointmentServiceImp implements AppointmentService {
 
         this.appointmentRepository.save(appointment);
 
-        return userMapper.toDTO(appointment);
 
     }
+
+    /**
+     * Check conflict if there's another appointment in the same times in the same doctor
+     * @param doctor that check it's appointment
+     * @param newAppointment that wanna check it's time
+     * @param duration for the appointment
+     */
     public void checkConflict(Doctor doctor, LocalDateTime newAppointment,Integer duration){
         LocalDateTime newStart=newAppointment;
         LocalDateTime newEnd=newAppointment.plusMinutes(duration);
@@ -92,12 +109,20 @@ public class AppointmentServiceImp implements AppointmentService {
 
     }
 
+    /**
+     * Delete the appointment
+     * Check if it's there or not and throw exception if it's not
+     * check if the doctor/patient can delete the appointment or not
+     * @param id appointment id
+     */
+
     public void deleteAppointment(Long id){
         Appointment appointment=this.appointmentRepository.findById(id).orElseThrow(
                 ()->{
                     throw new ResourcesNotFound("The appointment id is not found");
                 }
         );
+        //check the user if it can delete the appointment or not ( only the assigned doctor and patient can do that)
         Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
         String currentUserName=null;
         if(!(authentication instanceof AnonymousAuthenticationToken)){
@@ -109,6 +134,13 @@ public class AppointmentServiceImp implements AppointmentService {
 
     }
 
+    /**
+     * Update appointment status by id and status
+     * Check if the appointment is in the db or not and throw an exception if it's not
+     * @param id for the appointment
+     * @param status for the appointment
+     */
+
     public void updateAppointment(Long id,String status){
         Appointment appointment=this.appointmentRepository.findById(id).orElseThrow(
                 ()->{
@@ -117,6 +149,7 @@ public class AppointmentServiceImp implements AppointmentService {
         );
         Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
         String currentUserName=null;
+        //check if it's can update the appointment or not
         if(!(authentication instanceof AnonymousAuthenticationToken)){
             currentUserName=authentication.getName();
         }

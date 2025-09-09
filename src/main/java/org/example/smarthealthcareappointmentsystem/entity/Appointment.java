@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a appointment entity in the mySql database
+ */
 @Entity
 @Table(name="appointment")
 public class Appointment {
@@ -21,6 +24,7 @@ public class Appointment {
     private Status status=Status.SCHEDULED;
     private String notes;
     private Integer duration; // minutes
+    private String labResult;
 
 
     public Status getStatus() {
@@ -77,5 +81,13 @@ public class Appointment {
 
     public void setDuration(Integer duration) {
         this.duration = duration;
+    }
+
+    public String getLabResult() {
+        return labResult;
+    }
+
+    public void setLabResult(String labResult) {
+        this.labResult = labResult;
     }
 }
