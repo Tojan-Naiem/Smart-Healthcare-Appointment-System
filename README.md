@@ -122,4 +122,4 @@ Once the application is running, you can access it via your web browser at:
 
 
 Screenshot :
-[[](https://balsam-ease-5f0.notion.site/screen-shot-2698d21e0c6680a0ad18c8622ba21c72?pvs=143)
+https://balsam-ease-5f0.notion.site/screen-shot-2698d21e0c6680a0ad18c8622ba21c72?pvs=143
