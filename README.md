@@ -122,33 +122,4 @@ Once the application is running, you can access it via your web browser at:
 
 
 Screenshot :
-
-use case : 
-
-use case 1: 
-
-![image.png](attachment:d1202bed-18d4-4b2d-99db-66cf73edca17:image.png)
-
-![image.png](attachment:9b9dd6b8-111f-4cf3-a4f9-1b365f127375:image.png)
-
-![image.png](attachment:dbf501bd-3475-4343-b0f8-3a136ee8b790:image.png)
-
-use case 2: 
-
-![image.png](attachment:2617506f-49a2-47e4-bd0b-edeee47db4b9:image.png)
-
-![image.png](attachment:b889bbf7-55a5-44e7-98ab-83baf91a4203:image.png)
-
-![image.png](attachment:8063a7de-8450-4893-8e7b-a6546716e85a:image.png)
-
-![image.png](attachment:02c21bef-91a6-4af6-a60a-824329004535:image.png)
-
-![image.png](attachment:6ab39ee7-c337-48a6-9135-5ef9e55a3164:image.png)
-
-use case3: 
-
-![image.png](attachment:3828357c-0f2e-4f4e-a59b-a756c5e617d4:image.png)
-
-![image.png](attachment:b8e318f9-7fee-4cd7-8dd1-c8788c9a1602:image.png)
-
-![image.png](attachment:885df026-3f0f-4844-bac4-b3f99fdf2d19:image.png)
+[[](https://balsam-ease-5f0.notion.site/screen-shot-2698d21e0c6680a0ad18c8622ba21c72?pvs=143)
