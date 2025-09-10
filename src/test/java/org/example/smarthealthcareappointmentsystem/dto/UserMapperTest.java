@@ -1,6 +1,7 @@
 package org.example.smarthealthcareappointmentsystem.dto;
 
 import org.example.smarthealthcareappointmentsystem.entity.Doctor;
+import org.example.smarthealthcareappointmentsystem.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

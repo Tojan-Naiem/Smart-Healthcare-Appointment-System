@@ -1,5 +1,6 @@
-package org.example.smarthealthcareappointmentsystem.dto;
+package org.example.smarthealthcareappointmentsystem.mapper;
 
+import org.example.smarthealthcareappointmentsystem.dto.*;
 import org.example.smarthealthcareappointmentsystem.entity.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -74,17 +75,47 @@ public interface UserMapper {
      * @return the corresponding dto
      */
     MedicineDTO toMedicineDTO(Medicine medicine);
+//    /**
+//     * Converts an {@link  MedicineDTO} to  a list{@link Medicine}.
+//            * @param medicineDTOs the dto to be converted
+//     * @return a list of corresponding entity
+//     */
+//    // List mappings
+//    List<Medicine> toMedicineEntities(List<MedicineDTO> medicineDTOs);
+//    /**
+//     * Converts an {@link  Medicine} to a list  {@link MedicineDTO}.
+//     * @param medicines the entity to be converted
+//     * @return a list of the corresponding dto
+//     */
+//    List<MedicineDTO> toMedicineDTOs(List<Medicine> medicines);
+//
+//    /**
+//     * Converts an {@link  LabResultDTO} to a list{@link LabResult}.
+//     * @param labResultDTOS the dto to be converted
+//     * @return a list of corresponding entity
+//     */
+//    // List mappings
+//    List<LabResult> toLabResultEntities(List<LabResultDTO> labResultDTOS);
+//    /**
+//     * Converts an {@link  LabResult} to a list  {@link LabResultDTO}.
+//     * @param labResults the entity to be converted
+//     * @return a list of the corresponding dto
+//     */
+//    List<LabResultDTO> toLabResultDTOs(List<LabResult> labResults);
+
     /**
-     * Converts an {@link  MedicineDTO} to  a list{@link Medicine}.
-     * @param medicineDTOs the dto to be converted
-     * @return a list of corresponding entity
+     * Converts an {@link  LabResultDTO} to an {@link LabResult}.
+     * @param labResultDTO the dto to be converted
+     * @return the corresponding entity
      */
-    // List mappings
-    List<Medicine> toMedicineEntities(List<MedicineDTO> medicineDTOs);
+    // Medicine mapping
+    LabResult toLabResultEntity(LabResultDTO labResultDTO);
     /**
-     * Converts an {@link  Medicine} to a list  {@link MedicineDTO}.
-     * @param medicines the entity to be converted
-     * @return a list of the corresponding dto
+     * Converts an {@link  LabResult} to an {@link LabResultDTO}.
+     * @param labResult the entity to be converted
+     * @return the corresponding dto
      */
-    List<MedicineDTO> toMedicineDTOs(List<Medicine> medicines);
+    LabResultDTO toLabResultDTO(LabResult labResult);
+
+
 }

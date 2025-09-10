@@ -10,6 +10,7 @@ public class PrescriptionDTO {
     private List<MedicineDTO> medicineDTOS;
     private String instructions;
     private LocalDate issueDate;
+    private List<LabResultDTO> labResultDTO;
 
 
 
@@ -53,4 +54,19 @@ public class PrescriptionDTO {
         this.issueDate = issueDate;
     }
 
+    public List<MedicineDTO> getMedicineDTOS() {
+        return medicineDTOS;
+    }
+
+    public void setMedicineDTOS(List<MedicineDTO> medicineDTOS) {
+        this.medicineDTOS = medicineDTOS;
+    }
+
+    public List<LabResultDTO> getLabResultDTO() {
+        return labResultDTO;
+    }
+
+    public void setLabResultDTO(List<LabResultDTO> labResultDTO) {
+        this.labResultDTO = labResultDTO;
+    }
 }

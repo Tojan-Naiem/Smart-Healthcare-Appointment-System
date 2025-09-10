@@ -1,7 +1,7 @@
 package org.example.smarthealthcareappointmentsystem.service.Impl;
 
 import org.example.smarthealthcareappointmentsystem.dto.PrescriptionDTO;
-import org.example.smarthealthcareappointmentsystem.dto.UserMapper;
+import org.example.smarthealthcareappointmentsystem.mapper.UserMapper;
 import org.example.smarthealthcareappointmentsystem.exception.ResourcesNotFound;
 import org.example.smarthealthcareappointmentsystem.entity.Doctor;
 import org.example.smarthealthcareappointmentsystem.entity.Patient;
@@ -66,6 +66,11 @@ public class PrescriptionServiceImp implements PrescriptionService {
         prescription.setDoctorId(doctor.getId());
         prescription.setPatientId(patient.getId());
         prescription.setIssueDate(prescriptionDTO.getIssueDate());
+        prescription.setLabResults(
+                prescriptionDTO.getLabResultDTO().stream().map(
+                userMapper::toLabResultEntity
+                        ).toList()
+        );
         prescription.setMedicines(
                 prescriptionDTO.getMedicines()
                         .stream().map(

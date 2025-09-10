@@ -5,7 +5,6 @@ package org.example.smarthealthcareappointmentsystem.service.Impl;
  * Provides business logic for managing {@link org.example.smarthealthcareappointmentsystem.entity.Appointment}entity
  */
 import org.example.smarthealthcareappointmentsystem.dto.AppointmentDTO;
-import org.example.smarthealthcareappointmentsystem.dto.UserMapper;
 import org.example.smarthealthcareappointmentsystem.exception.AlreadyExistsException;
 import org.example.smarthealthcareappointmentsystem.exception.ForbiddenActionException;
 import org.example.smarthealthcareappointmentsystem.exception.ResourcesNotFound;

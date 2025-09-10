@@ -1,7 +1,7 @@
 package org.example.smarthealthcareappointmentsystem.service.Impl;
 
 import org.example.smarthealthcareappointmentsystem.dto.PatientDTO;
-import org.example.smarthealthcareappointmentsystem.dto.UserMapper;
+import org.example.smarthealthcareappointmentsystem.mapper.UserMapper;
 import org.example.smarthealthcareappointmentsystem.exception.AlreadyExistsException;
 import org.example.smarthealthcareappointmentsystem.exception.ResourcesNotFound;
 import org.example.smarthealthcareappointmentsystem.entity.Patient;
