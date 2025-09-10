@@ -1,6 +1,6 @@
 package org.example.smarthealthcareappointmentsystem.service.Impl;
 
-import org.example.smarthealthcareappointmentsystem.mapper.UserMapper;
+import org.example.smarthealthcareappointmentsystem.mapper.UserMapperDTO;
 import org.example.smarthealthcareappointmentsystem.dto.DoctorDTO;
 import org.example.smarthealthcareappointmentsystem.exception.AlreadyExistsException;
 import org.example.smarthealthcareappointmentsystem.exception.ResourcesNotFound;
@@ -25,11 +25,11 @@ import java.util.Optional;
 public class DoctorServiceImp implements DoctorService {
 
     private final DoctorRepository doctorRepository;
-    private final UserMapper userMapper;
+    private final UserMapperDTO userMapperDTO;
     private final PasswordEncoder passwordEncoder;
-    public DoctorServiceImp(DoctorRepository doctorRepository,UserMapper userMapper,PasswordEncoder passwordEncoder){
+    public DoctorServiceImp(DoctorRepository doctorRepository, UserMapperDTO userMapperDTO, PasswordEncoder passwordEncoder){
         this.doctorRepository=doctorRepository;
-        this.userMapper=userMapper;
+        this.userMapperDTO = userMapperDTO;
         this.passwordEncoder=passwordEncoder;
     }
 
@@ -49,7 +49,7 @@ public class DoctorServiceImp implements DoctorService {
         if(isExistByUsername){
             throw new AlreadyExistsException("The username is already exists");
         }
-        Doctor doctor= userMapper.toEntity(registeredDoctor);
+        Doctor doctor= userMapperDTO.toEntity(registeredDoctor);
         doctor.setPassword(passwordEncoder.encode(registeredDoctor.getPassword()));
         doctor.setRole(new Role(4,"DOCTOR"));
         doctor.setSpecialty(registeredDoctor.getSpecialty());
@@ -81,7 +81,7 @@ public class DoctorServiceImp implements DoctorService {
         }
         else doctors =this.doctorRepository.findAll(pageable);
         return doctors.map(
-                userMapper::toDTO
+                userMapperDTO::toDTO
         );
     }
 
@@ -94,7 +94,7 @@ public class DoctorServiceImp implements DoctorService {
     @Cacheable(value="doctors",key="#root.methodName+'_'+#id")
 
     public DoctorDTO getDoctorById(Long id){
-       return userMapper.toDTO(
+       return userMapperDTO.toDTO(
                this.doctorRepository.findById(id).orElseThrow(
                        ()-> new ResourcesNotFound("The id doctor not found")
                )
@@ -120,7 +120,7 @@ public class DoctorServiceImp implements DoctorService {
         updatedDoctor.setPassword(doctorDTO.getPassword());
 
         this.doctorRepository.save(updatedDoctor);
-        return userMapper.toDTO(updatedDoctor);
+        return userMapperDTO.toDTO(updatedDoctor);
     }
 
     /**

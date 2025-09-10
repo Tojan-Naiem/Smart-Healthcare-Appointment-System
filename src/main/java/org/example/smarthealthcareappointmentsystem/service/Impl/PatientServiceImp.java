@@ -1,7 +1,7 @@
 package org.example.smarthealthcareappointmentsystem.service.Impl;
 
 import org.example.smarthealthcareappointmentsystem.dto.PatientDTO;
-import org.example.smarthealthcareappointmentsystem.mapper.UserMapper;
+import org.example.smarthealthcareappointmentsystem.mapper.UserMapperDTO;
 import org.example.smarthealthcareappointmentsystem.exception.AlreadyExistsException;
 import org.example.smarthealthcareappointmentsystem.exception.ResourcesNotFound;
 import org.example.smarthealthcareappointmentsystem.entity.Patient;
@@ -24,15 +24,15 @@ import java.util.Optional;
 public class PatientServiceImp implements PatientService {
 
     private final PatientRepository patientRepository;
-    private final UserMapper userMapper;
+    private final UserMapperDTO userMapperDTO;
     private final PasswordEncoder passwordEncoder;
     public PatientServiceImp(
             PatientRepository patientRepository,
-            UserMapper userMapper,
+            UserMapperDTO userMapperDTO,
             PasswordEncoder passwordEncoder
     ){
         this.patientRepository=patientRepository;
-        this.userMapper=userMapper;
+        this.userMapperDTO = userMapperDTO;
         this.passwordEncoder=passwordEncoder;
     }
 
@@ -53,7 +53,7 @@ public class PatientServiceImp implements PatientService {
         if(isExistByUsername){
             throw new AlreadyExistsException("The username is already exists");
         }
-        Patient patient= userMapper.toEntity(registeredPatient);
+        Patient patient= userMapperDTO.toEntity(registeredPatient);
         patient.setPassword(passwordEncoder.encode(registeredPatient.getPassword()));
         patient.setRole(new Role(3,"PATIENT"));
 
@@ -74,7 +74,7 @@ public class PatientServiceImp implements PatientService {
                 }
         );
         return patients.map(
-                d-> userMapper.toDTO(d)
+                d-> userMapperDTO.toDTO(d)
         );
     }
 
@@ -88,7 +88,7 @@ public class PatientServiceImp implements PatientService {
         Patient patient= this.patientRepository.findById(id).orElseThrow(
                 ()-> {throw new ResourcesNotFound("The patient is not found");}
         );
-        return userMapper.toDTO(patient);
+        return userMapperDTO.toDTO(patient);
     }
 
     /**
@@ -109,7 +109,7 @@ public class PatientServiceImp implements PatientService {
         updatedPatient.setPassword(patientDTO.getPassword());
 
         this.patientRepository.save(updatedPatient);
-        return userMapper.toDTO(updatedPatient);
+        return userMapperDTO.toDTO(updatedPatient);
     }
 
 }

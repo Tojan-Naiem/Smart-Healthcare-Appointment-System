@@ -1,7 +1,7 @@
 package org.example.smarthealthcareappointmentsystem.service.Impl;
 
 import org.example.smarthealthcareappointmentsystem.dto.PatientDTO;
-import org.example.smarthealthcareappointmentsystem.mapper.UserMapper;
+import org.example.smarthealthcareappointmentsystem.mapper.UserMapperDTO;
 import org.example.smarthealthcareappointmentsystem.exception.AlreadyExistsException;
 import org.example.smarthealthcareappointmentsystem.exception.ResourcesNotFound;
 import org.example.smarthealthcareappointmentsystem.entity.Patient;
@@ -30,7 +30,7 @@ class PatientServiceImpTest {
     @Mock
     private PatientRepository patientRepository;
     @Mock
-    private UserMapper userMapper;
+    private UserMapperDTO userMapperDTO;
     @Mock
     private PasswordEncoder passwordEncoder;
 
@@ -56,7 +56,7 @@ class PatientServiceImpTest {
         patient.setFullName(patientDTO.getFullName());
 
 
-        when(userMapper.toEntity(patientDTO)).thenReturn(patient);
+        when(userMapperDTO.toEntity(patientDTO)).thenReturn(patient);
         when(passwordEncoder.encode("test123")).thenReturn("test123");
 
 
@@ -132,7 +132,7 @@ class PatientServiceImpTest {
         PatientDTO patientDTO =new PatientDTO();
         patientDTO.setEmail("d@gmail.com");
         when(this.patientRepository.findById(id)).thenReturn(Optional.of(patient));
-        when(this.userMapper.toDTO(patient)).thenReturn(patientDTO);
+        when(this.userMapperDTO.toDTO(patient)).thenReturn(patientDTO);
         PatientDTO returnedPatient=this.patientServiceImp.getPatientById(id);
         assertEquals(returnedPatient.getEmail(), patient.getEmail());
         verify(patientRepository).findById(id);
@@ -180,7 +180,7 @@ class PatientServiceImpTest {
         updatedPatient.setFullName("Tojan");
 
         when(this.patientRepository.findByEmail("t@gmail.com")).thenReturn(Optional.of(doctor));
-        when(this.userMapper.toDTO(any(Patient.class))).thenReturn(patientDTO);
+        when(this.userMapperDTO.toDTO(any(Patient.class))).thenReturn(patientDTO);
         when(patientRepository.save(any(Patient.class))).thenReturn(updatedPatient);
 
 

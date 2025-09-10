@@ -1,10 +1,13 @@
 package org.example.smarthealthcareappointmentsystem.controller;
 
 import org.example.smarthealthcareappointmentsystem.dto.AppointmentDTO;
+import org.example.smarthealthcareappointmentsystem.dto.DoctorDTO;
 import org.example.smarthealthcareappointmentsystem.dto.UpdateAppointmentStatusRequest;
 import org.example.smarthealthcareappointmentsystem.service.Impl.AppointmentServiceImp;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 /**
  * REST controller for handling appointment operations
@@ -48,6 +51,18 @@ public class AppointmentController {
     ){
         this.appointmentService.updateAppointment(id,request.getStatus());
         return ResponseEntity.ok("Successfully updated the appointment!");
+    }
+
+    @GetMapping("/")
+    @PreAuthorize("hasRole('DOCTOR')")
+    public ResponseEntity<?>getTodayAppointment()
+    {
+        return new ResponseEntity<>(
+
+         this.appointmentService.gitDoctorAppointment()
+        ,HttpStatus.OK);
+
+
     }
 
     /**

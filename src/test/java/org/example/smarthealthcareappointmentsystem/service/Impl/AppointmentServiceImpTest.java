@@ -1,6 +1,6 @@
 package org.example.smarthealthcareappointmentsystem.service.Impl;
 
-import org.example.smarthealthcareappointmentsystem.mapper.UserMapper;
+import org.example.smarthealthcareappointmentsystem.mapper.UserMapperDTO;
 import org.example.smarthealthcareappointmentsystem.entity.Appointment;
 import org.example.smarthealthcareappointmentsystem.entity.Doctor;
 import org.example.smarthealthcareappointmentsystem.entity.Patient;
@@ -35,7 +35,7 @@ class AppointmentServiceImpTest {
     private DoctorRepository doctorRepository;
     @Mock
 
-    private UserMapper userMapper;
+    private UserMapperDTO userMapperDTO;
 
     @Test
     public void checkConflict_success(){

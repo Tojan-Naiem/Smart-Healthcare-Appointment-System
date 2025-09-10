@@ -1,7 +1,7 @@
 package org.example.smarthealthcareappointmentsystem.service;
 
 import org.example.smarthealthcareappointmentsystem.dto.DoctorDTO;
-import org.example.smarthealthcareappointmentsystem.mapper.UserMapper;
+import org.example.smarthealthcareappointmentsystem.mapper.UserMapperDTO;
 import org.example.smarthealthcareappointmentsystem.exception.AlreadyExistsException;
 import org.example.smarthealthcareappointmentsystem.exception.ResourcesNotFound;
 import org.example.smarthealthcareappointmentsystem.entity.Doctor;
@@ -30,7 +30,7 @@ class DoctorServiceTest {
     @Mock
     private DoctorRepository doctorRepository;
     @Mock
-    private UserMapper userMapper;
+    private UserMapperDTO userMapperDTO;
     @Mock
     private PasswordEncoder passwordEncoder;
 
@@ -60,7 +60,7 @@ class DoctorServiceTest {
         doctor.setBirthday(doctorDTO.getBirthday());
 
 
-        when(userMapper.toEntity(doctorDTO)).thenReturn(doctor);
+        when(userMapperDTO.toEntity(doctorDTO)).thenReturn(doctor);
         when(passwordEncoder.encode("test123")).thenReturn("test123");
 
 
@@ -172,7 +172,7 @@ class DoctorServiceTest {
         DoctorDTO doctorDTO=new DoctorDTO();
         doctorDTO.setEmail("d@gmail.com");
         when(this.doctorRepository.findById(id)).thenReturn(Optional.of(doctor));
-        when(this.userMapper.toDTO(doctor)).thenReturn(doctorDTO);
+        when(this.userMapperDTO.toDTO(doctor)).thenReturn(doctorDTO);
         DoctorDTO returnedDoctor=this.doctorService.getDoctorById(id);
         assertEquals(returnedDoctor.getEmail(),doctor.getEmail());
         verify(doctorRepository).findById(id);
@@ -219,7 +219,7 @@ class DoctorServiceTest {
         updatedDoctor.setFullName("Tojan");
 
         when(this.doctorRepository.findByEmail("t@gmail.com")).thenReturn(Optional.of(doctor));
-        when(this.userMapper.toDTO(any(Doctor.class))).thenReturn(doctorDTO);
+        when(this.userMapperDTO.toDTO(any(Doctor.class))).thenReturn(doctorDTO);
         when(doctorRepository.save(any(Doctor.class))).thenReturn(updatedDoctor);
 
 

@@ -4,7 +4,9 @@ package org.example.smarthealthcareappointmentsystem.service.Impl;
  * Implementation of the {@link org.example.smarthealthcareappointmentsystem.service.AppointmentService} interface
  * Provides business logic for managing {@link org.example.smarthealthcareappointmentsystem.entity.Appointment}entity
  */
+import org.apache.catalina.security.SecurityUtil;
 import org.example.smarthealthcareappointmentsystem.dto.AppointmentDTO;
+import org.example.smarthealthcareappointmentsystem.dto.DoctorDTO;
 import org.example.smarthealthcareappointmentsystem.exception.AlreadyExistsException;
 import org.example.smarthealthcareappointmentsystem.exception.ForbiddenActionException;
 import org.example.smarthealthcareappointmentsystem.exception.ResourcesNotFound;
@@ -16,12 +18,16 @@ import org.example.smarthealthcareappointmentsystem.repository.AppointmentReposi
 import org.example.smarthealthcareappointmentsystem.repository.DoctorRepository;
 import org.example.smarthealthcareappointmentsystem.repository.PatientRepository;
 import org.example.smarthealthcareappointmentsystem.service.AppointmentService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 @Service
 public class AppointmentServiceImp implements AppointmentService {
@@ -103,7 +109,7 @@ public class AppointmentServiceImp implements AppointmentService {
             LocalDateTime existStart=a.getAppointmentDateTime();
             LocalDateTime existEnd=existStart.plusMinutes(a.getDuration());
             if (newStart.isBefore(existEnd) && newEnd.isAfter(existStart)) {
-                throw new AlreadyExistsException("There's already another appointment in this time");
+                throw new AlreadyExistsException("\"Time slot already taken\".");
             }
         }
 
@@ -160,5 +166,32 @@ public class AppointmentServiceImp implements AppointmentService {
 
         appointment.setStatus(Status.COMPLETED);
         this.appointmentRepository.save(appointment);
+    }
+
+
+
+    public List<Appointment> gitDoctorAppointment(){
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName=null;
+        //check if it's can update the appointment or not
+        if(!(authentication instanceof AnonymousAuthenticationToken)){
+            currentUserName=authentication.getName();
+        }
+        Doctor doctor=this.doctorRepository.findByUsername(currentUserName)
+                .orElseThrow(
+                        ()->{
+                            throw new ResourcesNotFound("The doctor id is not found");
+                        }
+                );
+        LocalDate todayDate = LocalDate.now();
+        LocalDateTime startOfDay = todayDate.atStartOfDay(); // 2025-09-10T00:00
+        LocalDateTime endOfDay = todayDate.atTime(LocalTime.MAX); // 2025-09-10T23:59:59.999999999
+
+        return this.appointmentRepository.findByDoctorIdAndAppointmentDateTimeBetween(
+                doctor.getId(), startOfDay, endOfDay
+        );
+
+
+
     }
 }

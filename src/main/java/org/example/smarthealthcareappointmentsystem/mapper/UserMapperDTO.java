@@ -5,10 +5,8 @@ import org.example.smarthealthcareappointmentsystem.entity.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import java.util.List;
-
-@Mapper(componentModel = "spring")
-public interface UserMapper {
+@Mapper(componentModel = "spring",implementationName = "UserMapperDtoImpl")
+public interface UserMapperDTO {
     /**
      * Converts an {@link  Doctor} to an {@link DoctorDTO}.
      * @param doctor the entity to be converted

@@ -1,22 +1,22 @@
 package org.example.smarthealthcareappointmentsystem.dto;
 
 import org.example.smarthealthcareappointmentsystem.entity.Doctor;
-import org.example.smarthealthcareappointmentsystem.mapper.UserMapper;
+import org.example.smarthealthcareappointmentsystem.mapper.UserMapperDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
-class UserMapperTest {
+class UserMapperDTOTest {
    @Autowired
-    private UserMapper userMapper;
+    private UserMapperDTO userMapperDTO;
    @Test
    public void givenDoctorToDoctorDTO_whenMaps_thenCorrect(){
        Doctor doctor=new Doctor();
        doctor.setFullName("Tojan");
        doctor.setEmail("t@gmail.com");
-       DoctorDTO doctorDTO=userMapper.toDTO(doctor);
+       DoctorDTO doctorDTO= userMapperDTO.toDTO(doctor);
        assertEquals(doctorDTO.getFullName(),doctor.getFullName());
        assertEquals(doctorDTO.getEmail(),doctor.getEmail());
 
@@ -26,7 +26,7 @@ class UserMapperTest {
        DoctorDTO doctorDTO=new DoctorDTO();
        doctorDTO.setFullName("Tojan");
        doctorDTO.setEmail("t@gmail.com");
-       Doctor doctor=userMapper.toEntity(doctorDTO);
+       Doctor doctor= userMapperDTO.toEntity(doctorDTO);
        assertEquals(doctorDTO.getFullName(),doctor.getFullName());
        assertEquals(doctorDTO.getEmail(),doctor.getEmail());
    }
