@@ -17,13 +17,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Implementation of the {@link PrescriptionService} interface
+ * Provides business logic for managing {@link Prescription}entity
+ */
 @Service
 public class PrescriptionServiceImp implements PrescriptionService {
 
-    private PrescriptionRepository prescriptionRepository;
-    private PatientRepository patientRepository;
-    private DoctorRepository doctorRepository;
-    private UserMapper userMapper;
+    private final PrescriptionRepository prescriptionRepository;
+    private final PatientRepository patientRepository;
+    private final DoctorRepository doctorRepository;
+    private final UserMapper userMapper;
     public PrescriptionServiceImp (
             PatientRepository patientRepository,
             DoctorRepository doctorRepository,
@@ -36,7 +40,15 @@ public class PrescriptionServiceImp implements PrescriptionService {
         this.prescriptionRepository=prescriptionRepository;
 
     }
+
+    /**
+     * Create prescription
+     * Check if the doctor have access to add for the patient
+     * @param prescriptionDTO to create the prescription
+     */
+    @Override
     public void createPrescription(PrescriptionDTO prescriptionDTO){
+        // Get the doctor info
         Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
         String currentUserName=null;
         if(!(authentication instanceof AnonymousAuthenticationToken)){
@@ -44,15 +56,11 @@ public class PrescriptionServiceImp implements PrescriptionService {
         }
         Patient patient=this.patientRepository.findById(prescriptionDTO.getPatientId())
                 .orElseThrow(
-                        ()->{
-                            throw new ResourcesNotFound("The patient username is not found");
-                        }
+                        ()-> new ResourcesNotFound("The patient username is not found")
                 );
         Doctor doctor=this.doctorRepository.findByUsername(currentUserName)
                 .orElseThrow(
-                        ()->{
-                            throw new ResourcesNotFound("The doctor is not found");
-                        }
+                        ()-> new ResourcesNotFound("The doctor is not found")
                 );
         Prescription prescription=new Prescription();
         prescription.setDoctorId(doctor.getId());
@@ -61,8 +69,7 @@ public class PrescriptionServiceImp implements PrescriptionService {
         prescription.setMedicines(
                 prescriptionDTO.getMedicines()
                         .stream().map(
-                                (p)->
-                                    userMapper.toMedicineEntity(p)
+                                userMapper::toMedicineEntity
 
                         ).toList()
         );
@@ -70,6 +77,12 @@ public class PrescriptionServiceImp implements PrescriptionService {
 
 
     }
+
+    /**
+     * Represent get prescriptions for patient
+     * @return a list of prescriptions list
+     */
+    @Override
     public List<PrescriptionDTO> getPrescriptionsForPatient(){
         Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
         String currentUserName=null;
@@ -78,13 +91,11 @@ public class PrescriptionServiceImp implements PrescriptionService {
         }
         Patient patient=this.patientRepository.findByUsername(currentUserName)
                 .orElseThrow(
-                        ()->{
-                            throw new ResourcesNotFound("The patient username is not found");
-                        }
+                        ()-> new ResourcesNotFound("The patient username is not found")
                 );
 
         return this.prescriptionRepository.findByPatientId(patient.getId()).stream().map(
-                (m)-> userMapper.toDTO(m)
+                userMapper::toDTO
                 ).toList();
     }
 

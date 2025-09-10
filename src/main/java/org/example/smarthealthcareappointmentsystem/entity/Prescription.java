@@ -6,6 +6,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ *  Represents a prescription entity in the mongodb database
+ */
 @Document(collection="Prescription")
 public class Prescription {
     @Id
@@ -13,6 +16,8 @@ public class Prescription {
     private Long patientId;
     private Long doctorId;
     private List<Medicine>medicines;
+    private List<LabResult> labResults;
+    //Notes
     private String instructions;
     private LocalDate issueDate;
 
@@ -64,5 +69,14 @@ public class Prescription {
         this.issueDate = issueDate;
     }
 
+    public List<LabResult> getLabResults() {
+        return labResults;
+    }
 
+    public void setLabResults(List<LabResult> labResults) {
+        this.labResults = labResults;
+    }
+    public void addLabResult(LabResult labResult){
+        this.labResults.add(labResult);
+    }
 }

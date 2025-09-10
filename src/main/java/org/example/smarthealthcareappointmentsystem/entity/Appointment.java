@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 /**
- * Represents a appointment entity in the mySql database
+ * Represents the appointment entity in the mySql database
  */
 @Entity
 @Table(name="appointment")

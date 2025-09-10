@@ -1,5 +1,8 @@
 package org.example.smarthealthcareappointmentsystem.entity;
 
+/**
+ * Represent the Medicine
+ */
 public class Medicine{
     private String id;
     private String medicineName;

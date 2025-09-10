@@ -1,5 +1,8 @@
 package org.example.smarthealthcareappointmentsystem.dto;
 
+/**
+ * Represent the medicine dto
+ */
 public class MedicineDTO {
 
     private String medicineName;
