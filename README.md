@@ -6,15 +6,10 @@ A comprehensive backend healthcare appointment management system built with Spri
 
 * [Overview](#overview)
 * [Features](#features)
-* [Tech Stack](#tech-stack)
-* [Architecture & Design Patterns](#architecture--design-patterns)
+* [Design Patterns](#architecture--design-patterns)
 * [Project Structure](#project-structure)
-* [Getting Started](#getting-started)
 * [Testing](#testing)
 * [API Documentation](#api-documentation)
-* [Contributing](#contributing)
-* [Contact & Support](#contact--support)
-* [Acknowledgments](#acknowledgments)
 
 ## Overview
 
@@ -89,39 +84,6 @@ The Smart Healthcare Appointment System is a robust backend solution designed to
 - Specialized conflict detection test cases
 - Repository layer testing with @DataJpaTest
 - Service layer mock testing
-
-## Tech Stack
-
-### Core Framework
-- Spring Boot 3.5.5 - Modern enterprise Java framework
-- Java 17 - Long-term support version
-
-### Security
-- Spring Security 6 - Authentication and authorization
-- JWT (JJWT 0.11.5) - Token-based authentication
-
-### Data Persistence
-- Spring Data JPA - Relational data access with Hibernate
-- Spring Data MongoDB - NoSQL document storage
-- MySQL 8.0 - Primary relational database
-- MongoDB - Medical records and prescriptions storage
-
-### Caching
-- Ehcache - Second-level caching for doctor entities
-- Spring Cache Abstraction - Unified caching API
-
-### Additional Technologies
-- Spring AOP - Cross-cutting concerns and logging
-- Spring Mail - Asynchronous email notifications
-- MapStruct 1.5.5 - DTO-Entity mapping
-- Lombok - Boilerplate code reduction
-- Maven - Build automation and dependency management
-
-### Testing
-- JUnit 5 - Unit testing framework
-- Mockito - Mocking framework
-- H2 Database - In-memory testing database
-- Spring Boot Test - Integration testing support
 
 ## Architecture & Design Patterns
 
@@ -272,93 +234,6 @@ Ensure you have the following installed:
 - Maven 3.9+
 - MySQL 8.0+
 - MongoDB 4.4+
-- Git
-
-### Installation Steps
-
-1. Clone the repository
-```bash
-   git clone https://github.com/Tojan-Naiem/Smart-Healthcare-Appointment-System.git
-   cd Smart-Healthcare-Appointment-System
-```
-
-2. Set up MySQL database
-```sql
-   CREATE DATABASE healthcareDB;
-```
-
-3. Set up MongoDB database
-   
-   MongoDB will automatically create the healthcareDB database on first connection.
-
-4. Configure database connections
-   
-   Edit `src/main/resources/application.properties`:
-```properties
-   # MySQL Configuration
-   spring.datasource.url=jdbc:mysql://localhost:3306/healthcareDB
-   spring.datasource.username=YOUR_MYSQL_USERNAME
-   spring.datasource.password=YOUR_MYSQL_PASSWORD
-   
-   # MongoDB Configuration
-   spring.data.mongodb.host=localhost
-   spring.data.mongodb.port=27017
-   spring.data.mongodb.database=healthcareDB
-   
-   # Email Configuration (optional)
-   spring.mail.username=YOUR_EMAIL@gmail.com
-   spring.mail.password=YOUR_APP_PASSWORD
-```
-
-5. Build the project
-```bash
-   ./mvnw clean install
-```
-   
-   On Windows:
-```bash
-   mvnw.cmd clean install
-```
-
-6. Run the application
-```bash
-   ./mvnw spring-boot:run
-```
-
-7. Access the API
-   
-   The application will start at: `http://localhost:8080`
-
-### Initial Setup
-
-1. Create roles (POST to `/api/v1/role/` - requires ADMIN):
-```json
-   { "roleName": "ADMIN" }
-   { "roleName": "DOCTOR" }
-   { "roleName": "PATIENT" }
-```
-
-2. Register admin user (POST to `/api/v1/auth/register`):
-```json
-   {
-     "fullName": "Admin User",
-     "username": "admin",
-     "email": "admin@hospital.com",
-     "password": "securePassword123",
-     "birthday": "1990-01-01",
-     "role": { "id": 1, "name": "ADMIN" }
-   }
-```
-
-3. Login (POST to `/api/v1/auth/login`):
-```json
-   {
-     "username": "admin",
-     "password": "securePassword123"
-   }
-```
-   
-   Save the returned JWT token for authenticated requests.
 
 ## Testing
 
@@ -608,47 +483,5 @@ Content-Type: application/json
 }
 ```
 
-## Contributing
 
-We welcome contributions! Please follow these steps:
 
-1. Fork the repository
-2. Create a feature branch
-```bash
-   git checkout -b feature/AmazingFeature
-```
-3. Commit your changes
-```bash
-   git commit -m 'Add some AmazingFeature'
-```
-4. Push to the branch
-```bash
-   git push origin feature/AmazingFeature
-```
-5. Open a Pull Request
-
-### Code Style Guidelines
-
-- Follow Java naming conventions
-- Write meaningful commit messages
-- Add JavaDoc comments for public methods
-- Include unit tests for new features
-- Ensure all tests pass before submitting PR
-
-## Contact & Support
-
-Developer: Tojan Naiem  
-GitHub: @Tojan-Naiem  
-Project Link: https://github.com/Tojan-Naiem/Smart-Healthcare-Appointment-System
-
-For issues and feature requests, please use the GitHub Issues page.
-
-## Acknowledgments
-
-- Spring Boot Team for the excellent framework
-- Hibernate for ORM capabilities
-- MongoDB for flexible document storage
-- MapStruct for simplifying DTO mappings
-- All contributors and testers
-
-Built with Spring Boot 3
